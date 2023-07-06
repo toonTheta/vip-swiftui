@@ -7,15 +7,37 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8744E8382A55841E001CC05E /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8744E8372A55841E001CC05E /* View+Extension.swift */; };
+		875C9E352A518A16009D2552 /* CategoryRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875C9E342A518A16009D2552 /* CategoryRow.swift */; };
+		875C9E382A51D580009D2552 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875C9E372A51D580009D2552 /* Date+Extension.swift */; };
+		875C9E422A51D834009D2552 /* HealthDetailPresenterWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875C9E3A2A51D834009D2552 /* HealthDetailPresenterWorker.swift */; };
+		875C9E432A51D834009D2552 /* HealthDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875C9E3B2A51D834009D2552 /* HealthDetailPresenter.swift */; };
+		875C9E442A51D834009D2552 /* HealthDetailWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875C9E3C2A51D834009D2552 /* HealthDetailWorker.swift */; };
+		875C9E452A51D834009D2552 /* HealthDetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875C9E3D2A51D834009D2552 /* HealthDetailRouter.swift */; };
+		875C9E462A51D834009D2552 /* HealthDetailModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875C9E3E2A51D834009D2552 /* HealthDetailModels.swift */; };
+		875C9E472A51D834009D2552 /* HealthDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875C9E3F2A51D834009D2552 /* HealthDetailViewController.swift */; };
+		875C9E482A51D834009D2552 /* HealthDetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875C9E402A51D834009D2552 /* HealthDetailInteractor.swift */; };
+		875C9E4B2A51DA62009D2552 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 875C9E4A2A51DA62009D2552 /* Main.storyboard */; };
+		875C9E4E2A51DCF8009D2552 /* CategoryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875C9E4D2A51DCF8009D2552 /* CategoryResponse.swift */; };
 		877AA4B52A4E9F8100D63011 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877AA4B42A4E9F8100D63011 /* AppDelegate.swift */; };
 		877AA4B72A4E9F8100D63011 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877AA4B62A4E9F8100D63011 /* SceneDelegate.swift */; };
 		877AA4B92A4E9F8100D63011 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877AA4B82A4E9F8100D63011 /* ViewController.swift */; };
-		877AA4BC2A4E9F8100D63011 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 877AA4BA2A4E9F8100D63011 /* Main.storyboard */; };
 		877AA4BE2A4E9F8200D63011 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 877AA4BD2A4E9F8200D63011 /* Assets.xcassets */; };
 		877AA4C12A4E9F8200D63011 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 877AA4BF2A4E9F8200D63011 /* LaunchScreen.storyboard */; };
 		877AA4CC2A4E9F8200D63011 /* CleanSwiftUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877AA4CB2A4E9F8200D63011 /* CleanSwiftUITests.swift */; };
 		877AA4D62A4E9F8200D63011 /* CleanSwiftUIUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877AA4D52A4E9F8200D63011 /* CleanSwiftUIUITests.swift */; };
 		877AA4D82A4E9F8200D63011 /* CleanSwiftUIUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877AA4D72A4E9F8200D63011 /* CleanSwiftUIUITestsLaunchTests.swift */; };
+		877AA4EE2A4E9FB600D63011 /* DashboardPresenterWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877AA4E62A4E9FB600D63011 /* DashboardPresenterWorker.swift */; };
+		877AA4EF2A4E9FB600D63011 /* DashboardPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877AA4E72A4E9FB600D63011 /* DashboardPresenter.swift */; };
+		877AA4F02A4E9FB600D63011 /* DashboardWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877AA4E82A4E9FB600D63011 /* DashboardWorker.swift */; };
+		877AA4F12A4E9FB600D63011 /* DashboardRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877AA4E92A4E9FB600D63011 /* DashboardRouter.swift */; };
+		877AA4F22A4E9FB600D63011 /* DashboardModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877AA4EA2A4E9FB600D63011 /* DashboardModels.swift */; };
+		877AA4F32A4E9FB600D63011 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877AA4EB2A4E9FB600D63011 /* DashboardViewController.swift */; };
+		877AA4F42A4E9FB600D63011 /* DashboardInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877AA4EC2A4E9FB600D63011 /* DashboardInteractor.swift */; };
+		877AA4F52A4E9FB600D63011 /* CounterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 877AA4ED2A4E9FB600D63011 /* CounterViewController.xib */; };
+		877AA4F72A4EB97800D63011 /* DashboardSceneViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877AA4F62A4EB97800D63011 /* DashboardSceneViewModel.swift */; };
+		87E21EAA2A570A8200124882 /* HealthDetailSceneViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E21EA92A570A8200124882 /* HealthDetailSceneViewModel.swift */; };
+		87E21EAC2A570BF600124882 /* HealthRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E21EAB2A570BF600124882 /* HealthRecord.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,19 +58,41 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		877AA4B12A4E9F8100D63011 /* CleanSwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CleanSwiftUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8744E8372A55841E001CC05E /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
+		875C9E342A518A16009D2552 /* CategoryRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryRow.swift; sourceTree = "<group>"; };
+		875C9E372A51D580009D2552 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
+		875C9E3A2A51D834009D2552 /* HealthDetailPresenterWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthDetailPresenterWorker.swift; sourceTree = "<group>"; };
+		875C9E3B2A51D834009D2552 /* HealthDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthDetailPresenter.swift; sourceTree = "<group>"; };
+		875C9E3C2A51D834009D2552 /* HealthDetailWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthDetailWorker.swift; sourceTree = "<group>"; };
+		875C9E3D2A51D834009D2552 /* HealthDetailRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthDetailRouter.swift; sourceTree = "<group>"; };
+		875C9E3E2A51D834009D2552 /* HealthDetailModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthDetailModels.swift; sourceTree = "<group>"; };
+		875C9E3F2A51D834009D2552 /* HealthDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthDetailViewController.swift; sourceTree = "<group>"; };
+		875C9E402A51D834009D2552 /* HealthDetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthDetailInteractor.swift; sourceTree = "<group>"; };
+		875C9E4A2A51DA62009D2552 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		875C9E4D2A51DCF8009D2552 /* CategoryResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryResponse.swift; sourceTree = "<group>"; };
+		877AA4B12A4E9F8100D63011 /* VIPSwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VIPSwiftUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		877AA4B42A4E9F8100D63011 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		877AA4B62A4E9F8100D63011 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		877AA4B82A4E9F8100D63011 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		877AA4BB2A4E9F8100D63011 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		877AA4BD2A4E9F8200D63011 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		877AA4C02A4E9F8200D63011 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		877AA4C22A4E9F8200D63011 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		877AA4C72A4E9F8200D63011 /* CleanSwiftUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CleanSwiftUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		877AA4C72A4E9F8200D63011 /* VIPSwiftUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VIPSwiftUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		877AA4CB2A4E9F8200D63011 /* CleanSwiftUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanSwiftUITests.swift; sourceTree = "<group>"; };
-		877AA4D12A4E9F8200D63011 /* CleanSwiftUIUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CleanSwiftUIUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		877AA4D12A4E9F8200D63011 /* VIPSwiftUIUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VIPSwiftUIUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		877AA4D52A4E9F8200D63011 /* CleanSwiftUIUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanSwiftUIUITests.swift; sourceTree = "<group>"; };
 		877AA4D72A4E9F8200D63011 /* CleanSwiftUIUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanSwiftUIUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		877AA4E62A4E9FB600D63011 /* DashboardPresenterWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardPresenterWorker.swift; sourceTree = "<group>"; };
+		877AA4E72A4E9FB600D63011 /* DashboardPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardPresenter.swift; sourceTree = "<group>"; };
+		877AA4E82A4E9FB600D63011 /* DashboardWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardWorker.swift; sourceTree = "<group>"; };
+		877AA4E92A4E9FB600D63011 /* DashboardRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardRouter.swift; sourceTree = "<group>"; };
+		877AA4EA2A4E9FB600D63011 /* DashboardModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardModels.swift; sourceTree = "<group>"; };
+		877AA4EB2A4E9FB600D63011 /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
+		877AA4EC2A4E9FB600D63011 /* DashboardInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardInteractor.swift; sourceTree = "<group>"; };
+		877AA4ED2A4E9FB600D63011 /* CounterViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CounterViewController.xib; sourceTree = "<group>"; };
+		877AA4F62A4EB97800D63011 /* DashboardSceneViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardSceneViewModel.swift; sourceTree = "<group>"; };
+		87E21EA92A570A8200124882 /* HealthDetailSceneViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthDetailSceneViewModel.swift; sourceTree = "<group>"; };
+		87E21EAB2A570BF600124882 /* HealthRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthRecord.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,12 +120,53 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		875C9E332A518A0C009D2552 /* views */ = {
+			isa = PBXGroup;
+			children = (
+				875C9E342A518A16009D2552 /* CategoryRow.swift */,
+			);
+			path = views;
+			sourceTree = "<group>";
+		};
+		875C9E362A51D573009D2552 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				875C9E372A51D580009D2552 /* Date+Extension.swift */,
+				8744E8372A55841E001CC05E /* View+Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		875C9E392A51D81F009D2552 /* HealthDetail */ = {
+			isa = PBXGroup;
+			children = (
+				875C9E3A2A51D834009D2552 /* HealthDetailPresenterWorker.swift */,
+				875C9E3B2A51D834009D2552 /* HealthDetailPresenter.swift */,
+				875C9E3C2A51D834009D2552 /* HealthDetailWorker.swift */,
+				875C9E3D2A51D834009D2552 /* HealthDetailRouter.swift */,
+				875C9E3E2A51D834009D2552 /* HealthDetailModels.swift */,
+				875C9E3F2A51D834009D2552 /* HealthDetailViewController.swift */,
+				875C9E402A51D834009D2552 /* HealthDetailInteractor.swift */,
+				87E21EA92A570A8200124882 /* HealthDetailSceneViewModel.swift */,
+			);
+			path = HealthDetail;
+			sourceTree = "<group>";
+		};
+		875C9E4C2A51DCEA009D2552 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				875C9E4D2A51DCF8009D2552 /* CategoryResponse.swift */,
+				87E21EAB2A570BF600124882 /* HealthRecord.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		877AA4A82A4E9F8100D63011 = {
 			isa = PBXGroup;
 			children = (
-				877AA4B32A4E9F8100D63011 /* CleanSwiftUI */,
-				877AA4CA2A4E9F8200D63011 /* CleanSwiftUITests */,
-				877AA4D42A4E9F8200D63011 /* CleanSwiftUIUITests */,
+				877AA4B32A4E9F8100D63011 /* VIPSwiftUI */,
+				877AA4CA2A4E9F8200D63011 /* VIPSwiftUITests */,
+				877AA4D42A4E9F8200D63011 /* VIPSwiftUIUITests */,
 				877AA4B22A4E9F8100D63011 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -89,50 +174,79 @@
 		877AA4B22A4E9F8100D63011 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				877AA4B12A4E9F8100D63011 /* CleanSwiftUI.app */,
-				877AA4C72A4E9F8200D63011 /* CleanSwiftUITests.xctest */,
-				877AA4D12A4E9F8200D63011 /* CleanSwiftUIUITests.xctest */,
+				877AA4B12A4E9F8100D63011 /* VIPSwiftUI.app */,
+				877AA4C72A4E9F8200D63011 /* VIPSwiftUITests.xctest */,
+				877AA4D12A4E9F8200D63011 /* VIPSwiftUIUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		877AA4B32A4E9F8100D63011 /* CleanSwiftUI */ = {
+		877AA4B32A4E9F8100D63011 /* VIPSwiftUI */ = {
 			isa = PBXGroup;
 			children = (
+				875C9E362A51D573009D2552 /* Extensions */,
 				877AA4B42A4E9F8100D63011 /* AppDelegate.swift */,
 				877AA4B62A4E9F8100D63011 /* SceneDelegate.swift */,
 				877AA4B82A4E9F8100D63011 /* ViewController.swift */,
-				877AA4BA2A4E9F8100D63011 /* Main.storyboard */,
+				877AA4E42A4E9F9800D63011 /* Scenes */,
 				877AA4BD2A4E9F8200D63011 /* Assets.xcassets */,
 				877AA4BF2A4E9F8200D63011 /* LaunchScreen.storyboard */,
+				875C9E4A2A51DA62009D2552 /* Main.storyboard */,
 				877AA4C22A4E9F8200D63011 /* Info.plist */,
 			);
-			path = CleanSwiftUI;
+			path = VIPSwiftUI;
 			sourceTree = "<group>";
 		};
-		877AA4CA2A4E9F8200D63011 /* CleanSwiftUITests */ = {
+		877AA4CA2A4E9F8200D63011 /* VIPSwiftUITests */ = {
 			isa = PBXGroup;
 			children = (
 				877AA4CB2A4E9F8200D63011 /* CleanSwiftUITests.swift */,
 			);
-			path = CleanSwiftUITests;
+			path = VIPSwiftUITests;
 			sourceTree = "<group>";
 		};
-		877AA4D42A4E9F8200D63011 /* CleanSwiftUIUITests */ = {
+		877AA4D42A4E9F8200D63011 /* VIPSwiftUIUITests */ = {
 			isa = PBXGroup;
 			children = (
 				877AA4D52A4E9F8200D63011 /* CleanSwiftUIUITests.swift */,
 				877AA4D72A4E9F8200D63011 /* CleanSwiftUIUITestsLaunchTests.swift */,
 			);
-			path = CleanSwiftUIUITests;
+			path = VIPSwiftUIUITests;
+			sourceTree = "<group>";
+		};
+		877AA4E42A4E9F9800D63011 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				875C9E4C2A51DCEA009D2552 /* Models */,
+				875C9E392A51D81F009D2552 /* HealthDetail */,
+				877AA4E52A4E9FA100D63011 /* Dashboard */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		877AA4E52A4E9FA100D63011 /* Dashboard */ = {
+			isa = PBXGroup;
+			children = (
+				875C9E332A518A0C009D2552 /* views */,
+				877AA4E62A4E9FB600D63011 /* DashboardPresenterWorker.swift */,
+				877AA4E72A4E9FB600D63011 /* DashboardPresenter.swift */,
+				877AA4E82A4E9FB600D63011 /* DashboardWorker.swift */,
+				877AA4E92A4E9FB600D63011 /* DashboardRouter.swift */,
+				877AA4EA2A4E9FB600D63011 /* DashboardModels.swift */,
+				877AA4EB2A4E9FB600D63011 /* DashboardViewController.swift */,
+				877AA4EC2A4E9FB600D63011 /* DashboardInteractor.swift */,
+				877AA4F62A4EB97800D63011 /* DashboardSceneViewModel.swift */,
+				877AA4ED2A4E9FB600D63011 /* CounterViewController.xib */,
+			);
+			path = Dashboard;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		877AA4B02A4E9F8100D63011 /* CleanSwiftUI */ = {
+		877AA4B02A4E9F8100D63011 /* VIPSwiftUI */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 877AA4DB2A4E9F8200D63011 /* Build configuration list for PBXNativeTarget "CleanSwiftUI" */;
+			buildConfigurationList = 877AA4DB2A4E9F8200D63011 /* Build configuration list for PBXNativeTarget "VIPSwiftUI" */;
 			buildPhases = (
 				877AA4AD2A4E9F8100D63011 /* Sources */,
 				877AA4AE2A4E9F8100D63011 /* Frameworks */,
@@ -142,14 +256,14 @@
 			);
 			dependencies = (
 			);
-			name = CleanSwiftUI;
+			name = VIPSwiftUI;
 			productName = CleanSwiftUI;
-			productReference = 877AA4B12A4E9F8100D63011 /* CleanSwiftUI.app */;
+			productReference = 877AA4B12A4E9F8100D63011 /* VIPSwiftUI.app */;
 			productType = "com.apple.product-type.application";
 		};
-		877AA4C62A4E9F8200D63011 /* CleanSwiftUITests */ = {
+		877AA4C62A4E9F8200D63011 /* VIPSwiftUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 877AA4DE2A4E9F8200D63011 /* Build configuration list for PBXNativeTarget "CleanSwiftUITests" */;
+			buildConfigurationList = 877AA4DE2A4E9F8200D63011 /* Build configuration list for PBXNativeTarget "VIPSwiftUITests" */;
 			buildPhases = (
 				877AA4C32A4E9F8200D63011 /* Sources */,
 				877AA4C42A4E9F8200D63011 /* Frameworks */,
@@ -160,14 +274,14 @@
 			dependencies = (
 				877AA4C92A4E9F8200D63011 /* PBXTargetDependency */,
 			);
-			name = CleanSwiftUITests;
+			name = VIPSwiftUITests;
 			productName = CleanSwiftUITests;
-			productReference = 877AA4C72A4E9F8200D63011 /* CleanSwiftUITests.xctest */;
+			productReference = 877AA4C72A4E9F8200D63011 /* VIPSwiftUITests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		877AA4D02A4E9F8200D63011 /* CleanSwiftUIUITests */ = {
+		877AA4D02A4E9F8200D63011 /* VIPSwiftUIUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 877AA4E12A4E9F8200D63011 /* Build configuration list for PBXNativeTarget "CleanSwiftUIUITests" */;
+			buildConfigurationList = 877AA4E12A4E9F8200D63011 /* Build configuration list for PBXNativeTarget "VIPSwiftUIUITests" */;
 			buildPhases = (
 				877AA4CD2A4E9F8200D63011 /* Sources */,
 				877AA4CE2A4E9F8200D63011 /* Frameworks */,
@@ -178,9 +292,9 @@
 			dependencies = (
 				877AA4D32A4E9F8200D63011 /* PBXTargetDependency */,
 			);
-			name = CleanSwiftUIUITests;
+			name = VIPSwiftUIUITests;
 			productName = CleanSwiftUIUITests;
-			productReference = 877AA4D12A4E9F8200D63011 /* CleanSwiftUIUITests.xctest */;
+			productReference = 877AA4D12A4E9F8200D63011 /* VIPSwiftUIUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -206,7 +320,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 877AA4AC2A4E9F8100D63011 /* Build configuration list for PBXProject "CleanSwiftUI" */;
+			buildConfigurationList = 877AA4AC2A4E9F8100D63011 /* Build configuration list for PBXProject "VIPSwiftUI" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -219,9 +333,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				877AA4B02A4E9F8100D63011 /* CleanSwiftUI */,
-				877AA4C62A4E9F8200D63011 /* CleanSwiftUITests */,
-				877AA4D02A4E9F8200D63011 /* CleanSwiftUIUITests */,
+				877AA4B02A4E9F8100D63011 /* VIPSwiftUI */,
+				877AA4C62A4E9F8200D63011 /* VIPSwiftUITests */,
+				877AA4D02A4E9F8200D63011 /* VIPSwiftUIUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -232,8 +346,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				877AA4C12A4E9F8200D63011 /* LaunchScreen.storyboard in Resources */,
+				877AA4F52A4E9FB600D63011 /* CounterViewController.xib in Resources */,
 				877AA4BE2A4E9F8200D63011 /* Assets.xcassets in Resources */,
-				877AA4BC2A4E9F8100D63011 /* Main.storyboard in Resources */,
+				875C9E4B2A51DA62009D2552 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,8 +373,29 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				87E21EAA2A570A8200124882 /* HealthDetailSceneViewModel.swift in Sources */,
+				877AA4EF2A4E9FB600D63011 /* DashboardPresenter.swift in Sources */,
+				87E21EAC2A570BF600124882 /* HealthRecord.swift in Sources */,
 				877AA4B92A4E9F8100D63011 /* ViewController.swift in Sources */,
+				875C9E4E2A51DCF8009D2552 /* CategoryResponse.swift in Sources */,
+				875C9E382A51D580009D2552 /* Date+Extension.swift in Sources */,
+				875C9E472A51D834009D2552 /* HealthDetailViewController.swift in Sources */,
+				877AA4F72A4EB97800D63011 /* DashboardSceneViewModel.swift in Sources */,
+				877AA4F22A4E9FB600D63011 /* DashboardModels.swift in Sources */,
+				875C9E422A51D834009D2552 /* HealthDetailPresenterWorker.swift in Sources */,
+				875C9E442A51D834009D2552 /* HealthDetailWorker.swift in Sources */,
+				875C9E432A51D834009D2552 /* HealthDetailPresenter.swift in Sources */,
+				875C9E462A51D834009D2552 /* HealthDetailModels.swift in Sources */,
+				877AA4F42A4E9FB600D63011 /* DashboardInteractor.swift in Sources */,
+				877AA4F32A4E9FB600D63011 /* DashboardViewController.swift in Sources */,
+				877AA4F02A4E9FB600D63011 /* DashboardWorker.swift in Sources */,
+				877AA4EE2A4E9FB600D63011 /* DashboardPresenterWorker.swift in Sources */,
 				877AA4B52A4E9F8100D63011 /* AppDelegate.swift in Sources */,
+				875C9E482A51D834009D2552 /* HealthDetailInteractor.swift in Sources */,
+				877AA4F12A4E9FB600D63011 /* DashboardRouter.swift in Sources */,
+				8744E8382A55841E001CC05E /* View+Extension.swift in Sources */,
+				875C9E452A51D834009D2552 /* HealthDetailRouter.swift in Sources */,
+				875C9E352A518A16009D2552 /* CategoryRow.swift in Sources */,
 				877AA4B72A4E9F8100D63011 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -286,25 +422,17 @@
 /* Begin PBXTargetDependency section */
 		877AA4C92A4E9F8200D63011 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 877AA4B02A4E9F8100D63011 /* CleanSwiftUI */;
+			target = 877AA4B02A4E9F8100D63011 /* VIPSwiftUI */;
 			targetProxy = 877AA4C82A4E9F8200D63011 /* PBXContainerItemProxy */;
 		};
 		877AA4D32A4E9F8200D63011 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 877AA4B02A4E9F8100D63011 /* CleanSwiftUI */;
+			target = 877AA4B02A4E9F8100D63011 /* VIPSwiftUI */;
 			targetProxy = 877AA4D22A4E9F8200D63011 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		877AA4BA2A4E9F8100D63011 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				877AA4BB2A4E9F8100D63011 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		877AA4BF2A4E9F8200D63011 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -439,10 +567,11 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 57586HN8LA;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = CleanSwiftUI/Info.plist;
+				INFOPLIST_FILE = VIPSwiftUI/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIRequiresFullScreen = NO;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -450,7 +579,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = toon.CleanSwiftUI;
+				PRODUCT_BUNDLE_IDENTIFIER = toon.VIPSwiftUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -467,10 +596,11 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 57586HN8LA;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = CleanSwiftUI/Info.plist;
+				INFOPLIST_FILE = VIPSwiftUI/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIRequiresFullScreen = NO;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -478,7 +608,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = toon.CleanSwiftUI;
+				PRODUCT_BUNDLE_IDENTIFIER = toon.VIPSwiftUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -502,7 +632,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CleanSwiftUI.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/CleanSwiftUI";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/VIPSwiftUI.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/VIPSwiftUI";
 			};
 			name = Debug;
 		};
@@ -522,7 +652,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CleanSwiftUI.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/CleanSwiftUI";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/VIPSwiftUI.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/VIPSwiftUI";
 			};
 			name = Release;
 		};
@@ -565,7 +695,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		877AA4AC2A4E9F8100D63011 /* Build configuration list for PBXProject "CleanSwiftUI" */ = {
+		877AA4AC2A4E9F8100D63011 /* Build configuration list for PBXProject "VIPSwiftUI" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				877AA4D92A4E9F8200D63011 /* Debug */,
@@ -574,7 +704,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		877AA4DB2A4E9F8200D63011 /* Build configuration list for PBXNativeTarget "CleanSwiftUI" */ = {
+		877AA4DB2A4E9F8200D63011 /* Build configuration list for PBXNativeTarget "VIPSwiftUI" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				877AA4DC2A4E9F8200D63011 /* Debug */,
@@ -583,7 +713,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		877AA4DE2A4E9F8200D63011 /* Build configuration list for PBXNativeTarget "CleanSwiftUITests" */ = {
+		877AA4DE2A4E9F8200D63011 /* Build configuration list for PBXNativeTarget "VIPSwiftUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				877AA4DF2A4E9F8200D63011 /* Debug */,
@@ -592,7 +722,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		877AA4E12A4E9F8200D63011 /* Build configuration list for PBXNativeTarget "CleanSwiftUIUITests" */ = {
+		877AA4E12A4E9F8200D63011 /* Build configuration list for PBXNativeTarget "VIPSwiftUIUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				877AA4E22A4E9F8200D63011 /* Debug */,
