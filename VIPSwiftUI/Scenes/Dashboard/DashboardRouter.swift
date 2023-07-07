@@ -13,7 +13,7 @@
 import UIKit
 
 protocol DashboardRoutingLogic {
-    func routeToHealthDetail(type: CategoryType)
+    func routeToHealthDetail(type: HealthRecordType)
 }
 
 final class DashboardRouter: DashboardRoutingLogic {
@@ -24,11 +24,11 @@ final class DashboardRouter: DashboardRoutingLogic {
     }
     
     
-    func routeToHealthDetail(type: CategoryType) {
+    func routeToHealthDetail(type: HealthRecordType) {
         guard let navVC = viewController?.navigationController else {
             return
         }
         
-        navVC.pushViewController(HealthDetailViewController(), animated: true)
+        navVC.pushViewController(HealthDetailViewController(recordType: type), animated: true)
     }
 }

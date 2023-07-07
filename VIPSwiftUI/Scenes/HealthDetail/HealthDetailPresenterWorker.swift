@@ -10,6 +10,21 @@
 //  see http://clean-swift.com
 //
 
-protocol HealthDetailPresenterWorkerProtocol {}
+protocol HealthDetailPresenterWorkerProtocol {
+    func getUnit(ofType type: HealthRecordType) -> String
+}
 
-final class HealthDetailPresenterWorker: HealthDetailPresenterWorkerProtocol {}
+final class HealthDetailPresenterWorker: HealthDetailPresenterWorkerProtocol {
+    func getUnit(ofType type: HealthRecordType) -> String {
+        switch type {
+        case .bodyMassIndex:
+            return "BODY MASS INDEX"
+        case .bodyFatPercentage:
+            return "PERCENT"
+        case .weight:
+            return "KG"
+        case .height:
+            return "CM"
+        }
+    }
+}

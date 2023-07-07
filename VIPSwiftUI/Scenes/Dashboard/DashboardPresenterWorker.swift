@@ -26,7 +26,7 @@ final class DashboardPresenterWorker: CounterPresenterWorkerProtocol {
 
 
 private extension DashboardPresenterWorker {
-    func getTitle(for type: CategoryType) -> String {
+    func getTitle(for type: HealthRecordType) -> String {
         switch type {
         case .bodyMassIndex:
             return "Body Mass Index"

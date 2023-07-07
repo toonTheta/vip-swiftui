@@ -19,6 +19,10 @@
 		875C9E482A51D834009D2552 /* HealthDetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875C9E402A51D834009D2552 /* HealthDetailInteractor.swift */; };
 		875C9E4B2A51DA62009D2552 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 875C9E4A2A51DA62009D2552 /* Main.storyboard */; };
 		875C9E4E2A51DCF8009D2552 /* CategoryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875C9E4D2A51DCF8009D2552 /* CategoryResponse.swift */; };
+		87704FFA2A570F9F00A85311 /* BaseUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87704FF92A570F9F00A85311 /* BaseUIViewController.swift */; };
+		87704FFD2A5724D000A85311 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 87704FFB2A5724D000A85311 /* Model.xcdatamodeld */; };
+		877050002A5725A200A85311 /* QueryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87704FFF2A5725A200A85311 /* QueryService.swift */; };
+		877050022A5725D500A85311 /* HealthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877050012A5725D500A85311 /* HealthService.swift */; };
 		877AA4B52A4E9F8100D63011 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877AA4B42A4E9F8100D63011 /* AppDelegate.swift */; };
 		877AA4B72A4E9F8100D63011 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877AA4B62A4E9F8100D63011 /* SceneDelegate.swift */; };
 		877AA4B92A4E9F8100D63011 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877AA4B82A4E9F8100D63011 /* ViewController.swift */; };
@@ -37,7 +41,6 @@
 		877AA4F52A4E9FB600D63011 /* CounterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 877AA4ED2A4E9FB600D63011 /* CounterViewController.xib */; };
 		877AA4F72A4EB97800D63011 /* DashboardSceneViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877AA4F62A4EB97800D63011 /* DashboardSceneViewModel.swift */; };
 		87E21EAA2A570A8200124882 /* HealthDetailSceneViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E21EA92A570A8200124882 /* HealthDetailSceneViewModel.swift */; };
-		87E21EAC2A570BF600124882 /* HealthRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E21EAB2A570BF600124882 /* HealthRecord.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +73,10 @@
 		875C9E402A51D834009D2552 /* HealthDetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthDetailInteractor.swift; sourceTree = "<group>"; };
 		875C9E4A2A51DA62009D2552 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		875C9E4D2A51DCF8009D2552 /* CategoryResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryResponse.swift; sourceTree = "<group>"; };
+		87704FF92A570F9F00A85311 /* BaseUIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseUIViewController.swift; sourceTree = "<group>"; };
+		87704FFC2A5724D000A85311 /* HealthRecord.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = HealthRecord.xcdatamodel; sourceTree = "<group>"; };
+		87704FFF2A5725A200A85311 /* QueryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryService.swift; sourceTree = "<group>"; };
+		877050012A5725D500A85311 /* HealthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthService.swift; sourceTree = "<group>"; };
 		877AA4B12A4E9F8100D63011 /* VIPSwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VIPSwiftUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		877AA4B42A4E9F8100D63011 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		877AA4B62A4E9F8100D63011 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -92,7 +99,6 @@
 		877AA4ED2A4E9FB600D63011 /* CounterViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CounterViewController.xib; sourceTree = "<group>"; };
 		877AA4F62A4EB97800D63011 /* DashboardSceneViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardSceneViewModel.swift; sourceTree = "<group>"; };
 		87E21EA92A570A8200124882 /* HealthDetailSceneViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthDetailSceneViewModel.swift; sourceTree = "<group>"; };
-		87E21EAB2A570BF600124882 /* HealthRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthRecord.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,15 +162,33 @@
 			isa = PBXGroup;
 			children = (
 				875C9E4D2A51DCF8009D2552 /* CategoryResponse.swift */,
-				87E21EAB2A570BF600124882 /* HealthRecord.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		87704FF82A570F8800A85311 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				875C9E4C2A51DCEA009D2552 /* Models */,
+				87704FF92A570F9F00A85311 /* BaseUIViewController.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		87704FFE2A57259700A85311 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				87704FFF2A5725A200A85311 /* QueryService.swift */,
+				877050012A5725D500A85311 /* HealthService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 		877AA4A82A4E9F8100D63011 = {
 			isa = PBXGroup;
 			children = (
 				877AA4B32A4E9F8100D63011 /* VIPSwiftUI */,
+				87704FFB2A5724D000A85311 /* Model.xcdatamodeld */,
 				877AA4CA2A4E9F8200D63011 /* VIPSwiftUITests */,
 				877AA4D42A4E9F8200D63011 /* VIPSwiftUIUITests */,
 				877AA4B22A4E9F8100D63011 /* Products */,
@@ -184,6 +208,8 @@
 		877AA4B32A4E9F8100D63011 /* VIPSwiftUI */ = {
 			isa = PBXGroup;
 			children = (
+				87704FFE2A57259700A85311 /* Services */,
+				87704FF82A570F8800A85311 /* Base */,
 				875C9E362A51D573009D2552 /* Extensions */,
 				877AA4B42A4E9F8100D63011 /* AppDelegate.swift */,
 				877AA4B62A4E9F8100D63011 /* SceneDelegate.swift */,
@@ -217,7 +243,6 @@
 		877AA4E42A4E9F9800D63011 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				875C9E4C2A51DCEA009D2552 /* Models */,
 				875C9E392A51D81F009D2552 /* HealthDetail */,
 				877AA4E52A4E9FA100D63011 /* Dashboard */,
 			);
@@ -373,9 +398,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				87704FFA2A570F9F00A85311 /* BaseUIViewController.swift in Sources */,
 				87E21EAA2A570A8200124882 /* HealthDetailSceneViewModel.swift in Sources */,
 				877AA4EF2A4E9FB600D63011 /* DashboardPresenter.swift in Sources */,
-				87E21EAC2A570BF600124882 /* HealthRecord.swift in Sources */,
 				877AA4B92A4E9F8100D63011 /* ViewController.swift in Sources */,
 				875C9E4E2A51DCF8009D2552 /* CategoryResponse.swift in Sources */,
 				875C9E382A51D580009D2552 /* Date+Extension.swift in Sources */,
@@ -385,9 +410,11 @@
 				875C9E422A51D834009D2552 /* HealthDetailPresenterWorker.swift in Sources */,
 				875C9E442A51D834009D2552 /* HealthDetailWorker.swift in Sources */,
 				875C9E432A51D834009D2552 /* HealthDetailPresenter.swift in Sources */,
+				877050002A5725A200A85311 /* QueryService.swift in Sources */,
 				875C9E462A51D834009D2552 /* HealthDetailModels.swift in Sources */,
 				877AA4F42A4E9FB600D63011 /* DashboardInteractor.swift in Sources */,
 				877AA4F32A4E9FB600D63011 /* DashboardViewController.swift in Sources */,
+				87704FFD2A5724D000A85311 /* Model.xcdatamodeld in Sources */,
 				877AA4F02A4E9FB600D63011 /* DashboardWorker.swift in Sources */,
 				877AA4EE2A4E9FB600D63011 /* DashboardPresenterWorker.swift in Sources */,
 				877AA4B52A4E9F8100D63011 /* AppDelegate.swift in Sources */,
@@ -396,6 +423,7 @@
 				8744E8382A55841E001CC05E /* View+Extension.swift in Sources */,
 				875C9E452A51D834009D2552 /* HealthDetailRouter.swift in Sources */,
 				875C9E352A518A16009D2552 /* CategoryRow.swift in Sources */,
+				877050022A5725D500A85311 /* HealthService.swift in Sources */,
 				877AA4B72A4E9F8100D63011 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -732,6 +760,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		87704FFB2A5724D000A85311 /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				87704FFC2A5724D000A85311 /* HealthRecord.xcdatamodel */,
+			);
+			currentVersion = 87704FFC2A5724D000A85311 /* HealthRecord.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 877AA4A92A4E9F8100D63011 /* Project object */;
 }

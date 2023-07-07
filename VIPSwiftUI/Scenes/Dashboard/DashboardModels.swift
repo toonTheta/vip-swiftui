@@ -27,15 +27,15 @@ enum Dashboard {
     
     enum TapCategory {
         struct Request {
-            let categoryType: CategoryType
+            let categoryType: HealthRecordType
         }
 
         struct Response {
-            let categoryType: CategoryType
+            let categoryType: HealthRecordType
         }
 
         struct ViewModel {
-            let categoryType: CategoryType
+            let categoryType: HealthRecordType
         }
     }
 }

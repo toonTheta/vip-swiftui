@@ -11,13 +11,33 @@
 //
 
 enum HealthDetail {
-    // MARK: Use cases
 
-    enum Something {
+    enum FetchDetail {
         struct Request {}
 
-        struct Response {}
+        struct Response {
+            let recordType: HealthRecordType
+            let records: [HealthRecord]
+        }
 
-        struct ViewModel {}
+        struct ViewModel {
+            // graph
+            let unit: String
+            let records: [HealthRecordViewModel]
+        }
+    }
+    
+    enum AddDetail {
+        struct Request {
+            let value: Double
+        }
+        
+        struct Response {
+            
+        }
+        
+        struct ViewModel {
+            let records: [HealthRecordViewModel]
+        }
     }
 }

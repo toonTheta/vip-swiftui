@@ -18,7 +18,7 @@ protocol DashboardDisplayLogic: AnyObject {
     func displayTapCategory(viewModel: Dashboard.TapCategory.ViewModel)
 }
 
-class DashboardViewController: UIViewController, DashboardDisplayLogic {
+class DashboardViewController: BaseUIViewController, DashboardDisplayLogic {
     
     private let viewModel = DashboardSceneViewModel(categoryItems: [])
     var interactor: DashboardInteractor!
@@ -27,9 +27,10 @@ class DashboardViewController: UIViewController, DashboardDisplayLogic {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.title = "Dashboard"
         
         setupVIP()
-        navigationItem.title = "Dashboard"
+        
         loadSwiftUIView(
             DashboardScreenSwiftUIView(
                 interactor: interactor,
@@ -58,21 +59,6 @@ private extension DashboardViewController {
         )
         
         interactor = DashboardInteractor(presenter: presenter)
-    }
-    
-    func loadSwiftUIView(_ swiftUIView: some View) {
-        let hostingController = UIHostingController(rootView: swiftUIView)
-        
-        addChild(hostingController)
-        view.addSubview(hostingController.view)
-        hostingController.view.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            hostingController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            hostingController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            hostingController.view.topAnchor.constraint(equalTo: view.topAnchor),
-            hostingController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        ])
-        hostingController.didMove(toParent: self)
     }
 }
 

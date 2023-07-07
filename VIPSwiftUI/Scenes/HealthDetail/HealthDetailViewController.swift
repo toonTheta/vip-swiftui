@@ -13,60 +13,88 @@
 import UIKit
 import SwiftUI
 
-protocol HealthDetailDisplayLogic: AnyObject {}
+protocol HealthDetailDisplayLogic: AnyObject {
+    func displayDetail(viewModel: HealthDetail.FetchDetail.ViewModel)
+}
 
-final class HealthDetailViewController: UIViewController, HealthDetailDisplayLogic {
+final class HealthDetailViewController: BaseUIViewController, HealthDetailDisplayLogic {
     var interactor: HealthDetailBusinessLogic?
     var router: (HealthDetailRoutingLogic & HealthDetailDataPassing)?
-
+    
+    private let sceneViewModel = HealthDetailSceneViewModel(
+        records: [],
+        unit: ""
+    )
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    init(recordType: HealthRecordType) {
+        super.init(nibName: nil, bundle: nil)
+        
+        setupVIP(recordType: recordType)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        interactor?.fetchDetail(request: .init())
+        
         navigationItem.title = "Detail"
-        loadSwiftUIView(HealthDetailScreenSwiftUIView(interactor: interactor, viewModel: .init(records: [])))
+        loadSwiftUIView(
+            HealthDetailScreenSwiftUIView(
+                interactor: interactor,
+                viewModel: sceneViewModel
+            )
+        )
+    }
+    
+    func displayDetail(viewModel: HealthDetail.FetchDetail.ViewModel) {
+        sceneViewModel.records = viewModel.records
+         sceneViewModel.unit = viewModel.unit
     }
 }
 
 private extension HealthDetailViewController {
-    func setupVIP() {
+    func setupVIP(recordType: HealthRecordType) {
         let viewController = self
-
+        
         let presenter = HealthDetailPresenter(
             viewController: viewController
         )
-
+        
         let interactor = HealthDetailInteractor(
-            presenter: presenter
+            presenter: presenter,
+            recordType: recordType,
+            healthService: QueryService.shared
         )
-
+        
         let router = HealthDetailRouter()
         viewController.interactor = interactor
         viewController.router = router
         router.viewController = viewController
         router.dataStore = interactor
     }
-    
-    func loadSwiftUIView(_ swiftUIView: some View) {
-        let hostingController = UIHostingController(rootView: swiftUIView)
-        
-        addChild(hostingController)
-        view.addSubview(hostingController.view)
-        hostingController.view.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            hostingController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            hostingController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            hostingController.view.topAnchor.constraint(equalTo: view.topAnchor),
-            hostingController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        ])
-        hostingController.didMove(toParent: self)
-    }
 }
 
 struct HealthDetailScreenSwiftUIView: View {
     var interactor: HealthDetailBusinessLogic?
     @ObservedObject var viewModel: HealthDetailSceneViewModel
-
+    
     var body: some View {
-        Text("Record")
+        List {
+            
+            Section {
+                Text("Graph")
+            }
+            
+            Section(header: Text(viewModel.unit)) {
+                ForEach(viewModel.records, id: \.id) { item in
+                    Text("\(item.value)")
+                }
+            }
+        }
     }
 }
 
@@ -74,7 +102,31 @@ struct HealthDetailScreenSwiftUIView_Previews: PreviewProvider {
     static var previews: some View {
         HealthDetailScreenSwiftUIView(
             interactor: nil,
-            viewModel: .init(records: [])
+            viewModel: .init(
+                records: _records,
+                unit: "KG"
+            )
         )
     }
 }
+
+fileprivate let _records: [HealthRecordViewModel] = [
+    .init(
+        id: .init(),
+        value: 12,
+        createdDate: Date(),
+        type: .weight
+    ),
+    .init(
+        id: .init(),
+        value: 12,
+        createdDate: Date(),
+        type: .weight
+    ),
+    .init(
+        id: .init(),
+        value: 12,
+        createdDate: Date(),
+        type: .weight
+    )
+]

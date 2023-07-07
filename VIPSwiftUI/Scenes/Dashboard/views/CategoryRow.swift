@@ -11,7 +11,7 @@ struct CategoryRowViewModel {
     let title: String
     let value: String
     let lastUpdated: String
-    let category: CategoryType
+    let category: HealthRecordType
 }
 
 struct CategoryRow: View {

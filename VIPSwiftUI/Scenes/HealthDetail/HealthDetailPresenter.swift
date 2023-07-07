@@ -10,7 +10,9 @@
 //  see http://clean-swift.com
 //
 
-protocol HealthDetailPresentationLogic {}
+protocol HealthDetailPresentationLogic {
+    func presentDetail(response: HealthDetail.FetchDetail.Response)
+}
 
 final class HealthDetailPresenter: HealthDetailPresentationLogic {
     weak var viewController: HealthDetailDisplayLogic?
@@ -26,5 +28,19 @@ final class HealthDetailPresenter: HealthDetailPresentationLogic {
     ) {
         self.viewController = viewController
         self.worker = worker
+    }
+    
+    func presentDetail(response: HealthDetail.FetchDetail.Response) {
+        let recordViewModel = response.records
+            .filter { $0.id != nil && $0.createdDate != nil && $0.type != nil }
+            .map { ($0.id!, $0.value, $0.createdDate!, $0.type! )}
+            .compactMap(HealthRecordViewModel.init)
+        
+        viewController?.displayDetail(
+            viewModel: .init(
+                unit: worker.getUnit(ofType: response.recordType),
+                records: recordViewModel
+            )
+        )
     }
 }

@@ -10,19 +10,61 @@
 //  see http://clean-swift.com
 //
 
-protocol HealthDetailBusinessLogic {}
+import Foundation
+
+protocol HealthDetailBusinessLogic {
+    func fetchDetail(request: HealthDetail.FetchDetail.Request)
+    func addDetail(request: HealthDetail.AddDetail.Request)
+}
 
 protocol HealthDetailDataStore {}
 
 final class HealthDetailInteractor: HealthDetailBusinessLogic, HealthDetailDataStore {
     var presenter: HealthDetailPresentationLogic
     private var worker: HealthDetailWorkerProtocol
+    
+    private let recordType: HealthRecordType
+    private let healthService: HealthServiceProtocol
 
     init(
         worker: HealthDetailWorkerProtocol = HealthDetailWorker(),
-        presenter: HealthDetailPresentationLogic
+        presenter: HealthDetailPresentationLogic,
+        recordType: HealthRecordType,
+        healthService: HealthServiceProtocol
     ) {
         self.worker = worker
         self.presenter = presenter
+        self.recordType = recordType
+        self.healthService = healthService
+    }
+    
+    func fetchDetail(request: HealthDetail.FetchDetail.Request) {
+        refreshDetail()
+    }
+    
+    func addDetail(request: HealthDetail.AddDetail.Request) {
+        healthService.createHealthRecord(
+            id: UUID(),
+            value: request.value,
+            createdDate: Date(),
+            type: recordType
+        )
+        
+        refreshDetail()
+    }
+    
+    func refreshDetail() {
+        let result = healthService.fetchHealthRecords(ofType: recordType)
+        
+        switch result {
+        case let .success(records):
+            presenter.presentDetail(response: .init(
+                recordType: recordType,
+                records: records
+            ))
+        case .failure(_):
+            // TODO: Handle error
+            break
+        }
     }
 }
