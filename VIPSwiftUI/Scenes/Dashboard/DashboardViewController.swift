@@ -74,6 +74,14 @@ struct DashboardScreenSwiftUIView: View {
                 print("### DEBUG tap")
                 interactor?.tapCategory(request: .init(categoryType: category.category))
             }
+            
+            Section {
+                TextInput(
+                    onTextChange: { text in
+                        print("dashboard: \(text)")
+                    }
+                )
+            }
         }
     }
 }
