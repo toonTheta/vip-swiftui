@@ -10,7 +10,9 @@
 //  see http://clean-swift.com
 //
 
-protocol HealthInputFormBusinessLogic {}
+protocol HealthInputFormBusinessLogic {
+    func proceedTextInput(request: HealthInputForm.ProceedTextInput.Request)
+}
 
 protocol HealthInputFormDataStore {}
 
@@ -24,5 +26,10 @@ final class HealthInputFormInteractor: HealthInputFormBusinessLogic, HealthInput
     ) {
         self.worker = worker
         self.presenter = presenter
+    }
+    
+    func proceedTextInput(request: HealthInputForm.ProceedTextInput.Request) {
+        let buttonEnabled = request.text.isEmpty == false
+        presenter.presentProceedTextInput(response: .init(addButtonEnabled: buttonEnabled))
     }
 }

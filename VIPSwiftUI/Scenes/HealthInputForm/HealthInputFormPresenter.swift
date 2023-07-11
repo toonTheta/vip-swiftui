@@ -10,7 +10,9 @@
 //  see http://clean-swift.com
 //
 
-protocol HealthInputFormPresentationLogic {}
+protocol HealthInputFormPresentationLogic {
+    func presentProceedTextInput(response: HealthInputForm.ProceedTextInput.Response)
+}
 
 final class HealthInputFormPresenter: HealthInputFormPresentationLogic {
     weak var viewController: HealthInputFormDisplayLogic?
@@ -26,5 +28,9 @@ final class HealthInputFormPresenter: HealthInputFormPresentationLogic {
     ) {
         self.viewController = viewController
         self.worker = worker
+    }
+    
+    func presentProceedTextInput(response: HealthInputForm.ProceedTextInput.Response) {
+        viewController?.displayProceedTextInput(viewModel: .init(addButtonEnabled: response.addButtonEnabled))
     }
 }

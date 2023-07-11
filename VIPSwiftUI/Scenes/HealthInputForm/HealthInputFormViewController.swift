@@ -13,39 +13,98 @@
 import UIKit
 import SwiftUI
 
-protocol HealthInputFormDisplayLogic: AnyObject {}
+protocol HealthInputFormViewControllerDelegate: AnyObject {
+    func didSubmitHealthInputData(withValue value: Double)
+}
+
+protocol HealthInputFormDisplayLogic: AnyObject {
+    func displayProceedTextInput(viewModel: HealthInputForm.ProceedTextInput.ViewModel)
+}
 
 final class HealthInputFormViewController: BaseUIViewController, HealthInputFormDisplayLogic {
     var interactor: HealthInputFormBusinessLogic?
     var router: (HealthInputFormRoutingLogic & HealthInputFormDataPassing)?
-
+    var addButton: UIBarButtonItem!
+    
+    private let sceneViewModel = HealthInputFormSceneViewModel(
+        date: "",
+        time: (hour: 10, minute: 23),
+        value: 0,
+        unitLabel: ""
+    )
+    
+    let textInputController = TextInputController()
+    
+    weak var delegate: HealthInputFormViewControllerDelegate?
+    
+    init(delegate: HealthInputFormViewControllerDelegate?) {
+        super.init(nibName: nil, bundle: nil)
+        self.delegate = delegate
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupVIP()
+        setupBarButton()
+        
+        loadSwiftUIView(HealthInputFormView(
+            viewController: self,
+            viewModel: sceneViewModel
+        ))
+    }
+    
+    func displayProceedTextInput(viewModel: HealthInputForm.ProceedTextInput.ViewModel) {
+        setAddButtonEnabled(viewModel.addButtonEnabled)
     }
 }
 
 private extension HealthInputFormViewController {
     func setupVIP() {
         let viewController = self
-
+        
         let presenter = HealthInputFormPresenter(
             viewController: viewController
         )
-
+        
         let interactor = HealthInputFormInteractor(
             presenter: presenter
         )
-
+        
         let router = HealthInputFormRouter()
         viewController.interactor = interactor
         viewController.router = router
         router.viewController = viewController
         router.dataStore = interactor
     }
+    
+    func setupBarButton() {
+        addButton = UIBarButtonItem(
+            title: "Add",
+            style: .plain,
+            target: self,
+            action: #selector(handleTapAddData)
+        )
+        
+        navigationItem.rightBarButtonItem = addButton
+    }
+    
+    @objc func handleTapAddData() {
+        guard let doubleValue = Double(textInputController.text) else { return }
+        
+        delegate?.didSubmitHealthInputData(withValue: doubleValue)
+    }
+    
+    func setAddButtonEnabled(_ enabled: Bool) {
+        addButton.isEnabled = enabled
+    }
 }
 
 struct HealthInputFormView: View {
-    var interactor: HealthInputFormInteractor?
+    var viewController: HealthInputFormViewController?
     @ObservedObject var viewModel: HealthInputFormSceneViewModel
     
     var body: some View {
@@ -65,11 +124,19 @@ struct HealthInputFormView: View {
             HStack {
                 Text(viewModel.unitLabel)
                 Spacer()
-//                TextField(<#LocalizedStringKey#>, text: <#Binding<String>#>)
+                TextInput(controller:viewController?.textInputController)
+                    .onTextChange { text in
+                        viewController?.interactor?.proceedTextInput(
+                            request: .init(text: text)
+                        )
+                    }
+                    .frame(maxWidth: 80)
+                    .keyboardType(.decimalPad)
             }
         }
     }
 }
+
 
 struct HealthInputFormView_Previews: PreviewProvider {
     static var previews: some View {

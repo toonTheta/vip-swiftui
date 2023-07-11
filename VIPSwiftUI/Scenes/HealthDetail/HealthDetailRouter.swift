@@ -10,7 +10,11 @@
 //  see http://clean-swift.com
 //
 
-protocol HealthDetailRoutingLogic {}
+import UIKit
+
+protocol HealthDetailRoutingLogic {
+    func routeToAddHealthRecord()
+}
 
 protocol HealthDetailDataPassing {
     var dataStore: HealthDetailDataStore? { get }
@@ -19,4 +23,12 @@ protocol HealthDetailDataPassing {
 final class HealthDetailRouter: HealthDetailRoutingLogic, HealthDetailDataPassing {
     weak var viewController: HealthDetailViewController?
     var dataStore: HealthDetailDataStore?
+    
+    
+    func routeToAddHealthRecord() {
+        let inputFormVC = HealthInputFormViewController(delegate: viewController)
+        let navVC = UINavigationController(rootViewController: inputFormVC)
+        
+        viewController?.present(navVC, animated: true)
+    }
 }

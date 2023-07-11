@@ -11,13 +11,17 @@
 //
 
 enum HealthInputForm {
-    // MARK: Use cases
+    enum ProceedTextInput {
+        struct Request {
+            let text: String
+        }
 
-    enum Something {
-        struct Request {}
+        struct Response {
+            let addButtonEnabled: Bool
+        }
 
-        struct Response {}
-
-        struct ViewModel {}
+        struct ViewModel {
+            let addButtonEnabled: Bool
+        }
     }
 }

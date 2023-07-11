@@ -32,8 +32,8 @@ final class HealthDetailViewController: BaseUIViewController, HealthDetailDispla
     
     init(recordType: HealthRecordType) {
         super.init(nibName: nil, bundle: nil)
-        
         setupVIP(recordType: recordType)
+        setupBarButton()
     }
     
     override func viewDidLoad() {
@@ -42,6 +42,7 @@ final class HealthDetailViewController: BaseUIViewController, HealthDetailDispla
         interactor?.fetchDetail(request: .init())
         
         navigationItem.title = "Detail"
+        
         loadSwiftUIView(
             HealthDetailScreenSwiftUIView(
                 interactor: interactor,
@@ -75,6 +76,22 @@ private extension HealthDetailViewController {
         viewController.router = router
         router.viewController = viewController
         router.dataStore = interactor
+    }
+    
+    func setupBarButton() {
+        let addButton = UIBarButtonItem(title: "Add Data", style: .plain, target: self, action: #selector(handleTapAddData))
+        
+        navigationItem.rightBarButtonItem = addButton
+    }
+    
+    @objc func handleTapAddData() {
+        router?.routeToAddHealthRecord()
+    }
+}
+
+extension HealthDetailViewController: HealthInputFormViewControllerDelegate {
+    func didSubmitHealthInputData(withValue value: Double) {
+        print("### DEBUG: \(value)")
     }
 }
 

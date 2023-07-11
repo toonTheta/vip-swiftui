@@ -74,22 +74,10 @@ struct DashboardScreenSwiftUIView: View {
     
     var body: some View {
         List {
-            
-            Section {
-                TextInput(controller: viewController?.textController) { text in
-                    print("Dashboard: \(text)")
-                }
-                
-                Button("RESET") {
-                    viewController?.setText()
-                }
-            }
-            
             ForEach(categoryViewModel, id: \.category) { model in
                 CategoryRow(
                     viewModel: model
                 ).onPress {
-                    print("### DEBUG tap")
                     viewController?.interactor?.tapCategory(
                         request: .init(categoryType: model.category)
                     )
