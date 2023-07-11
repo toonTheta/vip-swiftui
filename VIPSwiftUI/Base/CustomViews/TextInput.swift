@@ -9,26 +9,27 @@ import Combine
 import SwiftUI
 
 struct TextInput: View {
-    @ObservedObject var controller: TextInputController
-    private var onTextChange: Callback<String>?
+    @ObservedObject private var controller: TextInputController
     
     init(
         controller: TextInputController? = nil,
-        onTextChange: Callback<String>? = nil
+        onTextChange: ((String) -> Void)? = nil
     ) {
         self.controller = controller ?? TextInputController()
-        self.onTextChange = onTextChange
+        
+        self.controller.$userInputText
+            .dropFirst()
+            .removeDuplicates()
+            .sink { onTextChange?($0) }
+            .store(in: &self.controller.cancellables)
     }
     
     var body: some View {
         TextField("placeholder", text: Binding(
             get: { controller.text },
             set: { newValue in
+                controller.userInputText = newValue
                 controller.updateText(newValue)
-             
-                guard controller.stringCache != newValue else { return }
-                controller.updateStringCache(newValue)
-                onTextChange?(newValue)
             }
         ))
     }
@@ -36,13 +37,10 @@ struct TextInput: View {
 
 class TextInputController: ObservableObject {
     @Published private(set) var text: String = ""
-    fileprivate(set) var stringCache = ""
+    @Published fileprivate var userInputText: String = ""
+    fileprivate var cancellables = Set<AnyCancellable>()
     
     func updateText(_ string: String) {
         text = string
-    }
-    
-    fileprivate func updateStringCache(_ string: String) {
-        stringCache = string
     }
 }
