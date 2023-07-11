@@ -25,6 +25,8 @@ class DashboardViewController: BaseUIViewController, DashboardDisplayLogic {
     var presenter: DashboardPresenter!
     var router: DashboardRoutingLogic!
     
+    let textController = TextInputController()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "Dashboard"
@@ -33,12 +35,16 @@ class DashboardViewController: BaseUIViewController, DashboardDisplayLogic {
         
         loadSwiftUIView(
             DashboardScreenSwiftUIView(
-                interactor: interactor,
+                viewController: self,
                 viewModel: viewModel
             )
         )
         
         interactor.fetchCateogory(request: .init())
+    }
+    
+    func setText() {
+        textController.updateText("TESTTT")
     }
 
     func displayCategory(categoryItems: [CategoryRowViewModel]) {
@@ -63,24 +69,31 @@ private extension DashboardViewController {
 }
 
 struct DashboardScreenSwiftUIView: View {
-    var interactor: DashboardInteractor?
+    weak var viewController: DashboardViewController?
     @ObservedObject var viewModel: DashboardSceneViewModel
     
     var body: some View {
-        List(viewModel.categoryItems, id: \.category) { category in
-            CategoryRow(
-                viewModel: category
-            ).onPress {
-                print("### DEBUG tap")
-                interactor?.tapCategory(request: .init(categoryType: category.category))
-            }
+        List {
             
             Section {
-                TextInput(
-                    onTextChange: { text in
-                        print("dashboard: \(text)")
-                    }
-                )
+                TextInput(controller: viewController?.textController) { text in
+                    print("Dashboard: \(text)")
+                }
+                
+                Button("RESET") {
+                    viewController?.setText()
+                }
+            }
+            
+            ForEach(categoryViewModel, id: \.category) { model in
+                CategoryRow(
+                    viewModel: model
+                ).onPress {
+                    print("### DEBUG tap")
+                    viewController?.interactor?.tapCategory(
+                        request: .init(categoryType: model.category)
+                    )
+                }
             }
         }
     }
@@ -104,7 +117,7 @@ fileprivate let categoryViewModel: [CategoryRowViewModel] = [
 struct DashboardScreenSwiftUIView_Previews: PreviewProvider {
     static var previews: some View {
         DashboardScreenSwiftUIView(
-            interactor: nil,
+            viewController: nil,
             viewModel: .init(categoryItems: categoryViewModel)
         )
     }

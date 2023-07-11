@@ -21,24 +21,28 @@ struct TextInput: View {
     }
     
     var body: some View {
-        TextField("placeholder", text: $controller.text)
-            .onReceive(Just(controller.text)) { text in
-                onTextChange?(text)
+        TextField("placeholder", text: Binding(
+            get: { controller.text },
+            set: { newValue in
+                controller.updateText(newValue)
+             
+                guard controller.stringCache != newValue else { return }
+                controller.updateStringCache(newValue)
+                onTextChange?(newValue)
             }
-    }
-}
-
-struct TextInput_Previews: PreviewProvider {
-    static var previews: some View {
-        TextInput()
-            .previewLayout(.sizeThatFits)
+        ))
     }
 }
 
 class TextInputController: ObservableObject {
-    @Published var text: String = ""
+    @Published private(set) var text: String = ""
+    fileprivate(set) var stringCache = ""
     
-    func text(_ string: String) {
+    func updateText(_ string: String) {
         text = string
+    }
+    
+    fileprivate func updateStringCache(_ string: String) {
+        stringCache = string
     }
 }
