@@ -12,16 +12,9 @@ struct TextInput: View {
     @ObservedObject private var controller: TextInputController
     
     init(
-        controller: TextInputController? = nil,
-        onTextChange: ((String) -> Void)? = nil
+        controller: TextInputController? = nil
     ) {
         self.controller = controller ?? TextInputController()
-        
-        self.controller.$userInputText
-            .dropFirst()
-            .removeDuplicates()
-            .sink { onTextChange?($0) }
-            .store(in: &self.controller.cancellables)
     }
     
     var body: some View {
@@ -38,9 +31,30 @@ struct TextInput: View {
 class TextInputController: ObservableObject {
     @Published private(set) var text: String = ""
     @Published fileprivate var userInputText: String = ""
-    fileprivate var cancellables = Set<AnyCancellable>()
     
     func updateText(_ string: String) {
         text = string
+    }
+}
+
+extension TextInput {
+    func onTextChange(_ action: @escaping (String) -> Void) -> some View {
+        return self.modifier(TextInputChangeModifier(controller: controller, action: action))
+    }
+}
+
+struct TextInputChangeModifier: ViewModifier {
+    @ObservedObject var controller: TextInputController
+    let action: (String) -> Void
+    
+    func body(content: Content) -> some View {
+        content
+            .onReceive(
+                controller.$userInputText
+                .dropFirst()
+                .removeDuplicates()
+            ) { text in
+                action(text)
+            }
     }
 }
