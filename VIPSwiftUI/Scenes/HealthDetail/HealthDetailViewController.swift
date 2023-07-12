@@ -90,8 +90,8 @@ private extension HealthDetailViewController {
 }
 
 extension HealthDetailViewController: HealthInputFormViewControllerDelegate {
-    func didSubmitHealthInputData(withValue value: Double) {
-        print("### DEBUG: \(value)")
+    func didSubmitHealthInputData(withValue value: Double, date: Date) {
+        print("### DEBUG: \(value), \(date)")
     }
 }
 

@@ -10,15 +10,19 @@ import SwiftUI
 
 struct TextInput: View {
     @ObservedObject private var controller: TextInputController
+    private let placeholder: String?
     
     init(
+        placeholder: String? = nil,
         controller: TextInputController? = nil
     ) {
+        self.placeholder = placeholder
         self.controller = controller ?? TextInputController()
     }
     
     var body: some View {
-        TextField("placeholder", text: Binding(
+        
+        TextField(placeholder ?? "", text: Binding(
             get: { controller.text },
             set: { newValue in
                 controller.userInputText = newValue

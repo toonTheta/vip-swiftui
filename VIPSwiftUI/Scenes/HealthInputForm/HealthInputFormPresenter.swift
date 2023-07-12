@@ -11,6 +11,7 @@
 //
 
 protocol HealthInputFormPresentationLogic {
+    func presentPreparedData(response: HealthInputForm.PrepareData.Response)
     func presentProceedTextInput(response: HealthInputForm.ProceedTextInput.Response)
 }
 
@@ -28,6 +29,16 @@ final class HealthInputFormPresenter: HealthInputFormPresentationLogic {
     ) {
         self.viewController = viewController
         self.worker = worker
+    }
+    
+    func presentPreparedData(response: HealthInputForm.PrepareData.Response) {        
+        viewController?.displayPreparedData(viewModel: .init(
+            dateTitle: "Date",
+            timeTitle: "Time",
+            unitTitle: worker.mapUnitLabel(recordType: response.recordType),
+            dateValue: response.date,
+            textValue: response.value.flatMap { "\($0)" } ?? ""
+        ))
     }
     
     func presentProceedTextInput(response: HealthInputForm.ProceedTextInput.Response) {

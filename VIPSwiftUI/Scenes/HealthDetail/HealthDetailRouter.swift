@@ -26,7 +26,13 @@ final class HealthDetailRouter: HealthDetailRoutingLogic, HealthDetailDataPassin
     
     
     func routeToAddHealthRecord() {
-        let inputFormVC = HealthInputFormViewController(delegate: viewController)
+        guard let dataStore else { return }
+        
+        let inputFormVC = HealthInputFormViewController(
+            delegate: viewController,
+            sceneOption: .add(recordType: dataStore.recordType)
+        )
+        
         let navVC = UINavigationController(rootViewController: inputFormVC)
         
         viewController?.present(navVC, animated: true)

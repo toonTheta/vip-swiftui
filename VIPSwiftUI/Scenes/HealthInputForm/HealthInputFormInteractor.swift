@@ -10,8 +10,15 @@
 //  see http://clean-swift.com
 //
 
+import Foundation
+
 protocol HealthInputFormBusinessLogic {
+    var inputText: String? { get }
+    var inputDate: Date? { get }
+    
+    func prepareData(request: HealthInputForm.PrepareData.Request)
     func proceedTextInput(request: HealthInputForm.ProceedTextInput.Request)
+    func proceedDateInput(request: HealthInputForm.ProceedDateInput.Request)
 }
 
 protocol HealthInputFormDataStore {}
@@ -19,17 +26,43 @@ protocol HealthInputFormDataStore {}
 final class HealthInputFormInteractor: HealthInputFormBusinessLogic, HealthInputFormDataStore {
     var presenter: HealthInputFormPresentationLogic
     private var worker: HealthInputFormWorkerProtocol
+    
+    private let sceneOption: HealthInputForm.SceneOption
+    
+    private(set) var inputText: String?
+    private(set) var inputDate: Date?
 
     init(
         worker: HealthInputFormWorkerProtocol = HealthInputFormWorker(),
-        presenter: HealthInputFormPresentationLogic
+        presenter: HealthInputFormPresentationLogic,
+        sceneOption: HealthInputForm.SceneOption
     ) {
         self.worker = worker
         self.presenter = presenter
+        self.sceneOption = sceneOption
+    }
+    
+    func prepareData(request: HealthInputForm.PrepareData.Request) {
+        switch sceneOption {
+        case let .add(recordType):
+            presenter.presentPreparedData(response: .init(
+                date: Date(),
+                value: nil,
+                recordType: recordType
+            ))
+            break
+        case let .edit(record):
+            break
+        }
     }
     
     func proceedTextInput(request: HealthInputForm.ProceedTextInput.Request) {
-        let buttonEnabled = request.text.isEmpty == false
+        inputText = request.text
+        let buttonEnabled = inputText?.isEmpty == false
         presenter.presentProceedTextInput(response: .init(addButtonEnabled: buttonEnabled))
+    }
+    
+    func proceedDateInput(request: HealthInputForm.ProceedDateInput.Request) {
+        inputDate = request.date
     }
 }

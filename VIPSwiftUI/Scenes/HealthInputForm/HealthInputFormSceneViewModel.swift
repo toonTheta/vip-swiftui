@@ -8,17 +8,13 @@
 import SwiftUI
 
 class HealthInputFormSceneViewModel: ObservableObject {
-    typealias HourMinutePair = (hour: Int, minute: Int)
+    @Published var dateTitle: String
+    @Published var timeTitle: String
+    @Published var unitTitle: String
     
-    @Published var date: String
-    @Published var time: HourMinutePair
-    @Published var unitLabel: String
-    @Published var value: Double
-    
-    init(date: String, time: HourMinutePair, value: Double, unitLabel: String) {
-        self.date = date
-        self.time = time
-        self.value = value
-        self.unitLabel = unitLabel
+    init(dateTitle: String, timeTitle: String, unitTitle: String) {
+        self.dateTitle = dateTitle
+        self.timeTitle = timeTitle
+        self.unitTitle = unitTitle
     }
 }

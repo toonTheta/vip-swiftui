@@ -10,6 +10,21 @@
 //  see http://clean-swift.com
 //
 
-protocol HealthInputFormPresenterWorkerProtocol {}
+protocol HealthInputFormPresenterWorkerProtocol {
+    func mapUnitLabel(recordType: HealthRecordType) -> String
+}
 
-final class HealthInputFormPresenterWorker: HealthInputFormPresenterWorkerProtocol {}
+final class HealthInputFormPresenterWorker: HealthInputFormPresenterWorkerProtocol {
+    func mapUnitLabel(recordType: HealthRecordType) -> String {
+        switch recordType {
+        case .bodyMassIndex:
+            return "BMI"
+        case .bodyFatPercentage:
+            return "%"
+        case .weight:
+            return "kg"
+        case .height:
+            return "cm"
+        }
+    }
+}

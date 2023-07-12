@@ -17,13 +17,15 @@ protocol HealthDetailBusinessLogic {
     func addDetail(request: HealthDetail.AddDetail.Request)
 }
 
-protocol HealthDetailDataStore {}
+protocol HealthDetailDataStore {
+    var recordType: HealthRecordType! { get }
+}
 
 final class HealthDetailInteractor: HealthDetailBusinessLogic, HealthDetailDataStore {
     var presenter: HealthDetailPresentationLogic
     private var worker: HealthDetailWorkerProtocol
     
-    private let recordType: HealthRecordType
+    private(set) var recordType: HealthRecordType!
     private let healthService: HealthServiceProtocol
 
     init(

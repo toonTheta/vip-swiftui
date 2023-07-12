@@ -10,7 +10,34 @@
 //  see http://clean-swift.com
 //
 
+import Foundation
+
 enum HealthInputForm {
+    
+    enum SceneOption {
+        case add(recordType: HealthRecordType)
+        case edit(record: HealthRecord)
+    }
+    
+    enum PrepareData {
+        struct Request {}
+
+        struct Response {
+            let date: Date
+            let value: Double?
+            let recordType: HealthRecordType
+        }
+
+        struct ViewModel {
+            let dateTitle: String
+            let timeTitle: String
+            let unitTitle: String
+            
+            let dateValue: Date
+            let textValue: String
+        }
+    }
+    
     enum ProceedTextInput {
         struct Request {
             let text: String
@@ -22,6 +49,12 @@ enum HealthInputForm {
 
         struct ViewModel {
             let addButtonEnabled: Bool
+        }
+    }
+    
+    enum ProceedDateInput {
+        struct Request {
+            let date: Date
         }
     }
 }

@@ -14,11 +14,13 @@ import UIKit
 import SwiftUI
 
 protocol HealthInputFormViewControllerDelegate: AnyObject {
-    func didSubmitHealthInputData(withValue value: Double)
+    func didSubmitHealthInputData(withValue value: Double, date: Date)
+    
 }
 
 protocol HealthInputFormDisplayLogic: AnyObject {
     func displayProceedTextInput(viewModel: HealthInputForm.ProceedTextInput.ViewModel)
+    func displayPreparedData(viewModel: HealthInputForm.PrepareData.ViewModel)
 }
 
 final class HealthInputFormViewController: BaseUIViewController, HealthInputFormDisplayLogic {
@@ -27,19 +29,24 @@ final class HealthInputFormViewController: BaseUIViewController, HealthInputForm
     var addButton: UIBarButtonItem!
     
     private let sceneViewModel = HealthInputFormSceneViewModel(
-        date: "",
-        time: (hour: 10, minute: 23),
-        value: 0,
-        unitLabel: ""
+        dateTitle: "",
+        timeTitle: "",
+        unitTitle: ""
     )
     
+    private(set) var dateInputController = DateInputController()
+    private(set) var timeInputController = DateInputController()
     let textInputController = TextInputController()
     
     weak var delegate: HealthInputFormViewControllerDelegate?
     
-    init(delegate: HealthInputFormViewControllerDelegate?) {
+    init(
+        delegate: HealthInputFormViewControllerDelegate?,
+        sceneOption: HealthInputForm.SceneOption
+    ) {
         super.init(nibName: nil, bundle: nil)
         self.delegate = delegate
+        setupVIP(sceneOption: sceneOption)
     }
     
     required init?(coder: NSCoder) {
@@ -48,13 +55,25 @@ final class HealthInputFormViewController: BaseUIViewController, HealthInputForm
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupVIP()
+        
         setupBarButton()
         
         loadSwiftUIView(HealthInputFormView(
             viewController: self,
             viewModel: sceneViewModel
         ))
+        
+        interactor?.prepareData(request: .init())
+    }
+    
+    func displayPreparedData(viewModel: HealthInputForm.PrepareData.ViewModel) {
+        sceneViewModel.dateTitle = viewModel.dateTitle
+        sceneViewModel.timeTitle = viewModel.timeTitle
+        sceneViewModel.unitTitle = viewModel.unitTitle
+        
+        dateInputController.updateDate(viewModel.dateValue)
+        timeInputController.updateDate(viewModel.dateValue)
+        textInputController.updateText(viewModel.textValue)
     }
     
     func displayProceedTextInput(viewModel: HealthInputForm.ProceedTextInput.ViewModel) {
@@ -63,7 +82,7 @@ final class HealthInputFormViewController: BaseUIViewController, HealthInputForm
 }
 
 private extension HealthInputFormViewController {
-    func setupVIP() {
+    func setupVIP(sceneOption: HealthInputForm.SceneOption) {
         let viewController = self
         
         let presenter = HealthInputFormPresenter(
@@ -71,7 +90,8 @@ private extension HealthInputFormViewController {
         )
         
         let interactor = HealthInputFormInteractor(
-            presenter: presenter
+            presenter: presenter,
+            sceneOption: sceneOption
         )
         
         let router = HealthInputFormRouter()
@@ -93,9 +113,13 @@ private extension HealthInputFormViewController {
     }
     
     @objc func handleTapAddData() {
-        guard let doubleValue = Double(textInputController.text) else { return }
+        guard
+            let date = interactor?.inputDate,
+            let text = interactor?.inputText,
+            let doubleValue = Double(text)
+        else { return }
         
-        delegate?.didSubmitHealthInputData(withValue: doubleValue)
+        delegate?.didSubmitHealthInputData(withValue: doubleValue, date: date)
     }
     
     func setAddButtonEnabled(_ enabled: Bool) {
@@ -104,34 +128,52 @@ private extension HealthInputFormViewController {
 }
 
 struct HealthInputFormView: View {
-    var viewController: HealthInputFormViewController?
+    weak var viewController: HealthInputFormViewController?
     @ObservedObject var viewModel: HealthInputFormSceneViewModel
+    @State private var birthDate = Date.now
     
     var body: some View {
         List {
-            HStack {
-                Text("Date")
-                Spacer()
-                Text("\(viewModel.date)")
+            
+            DateInput(
+                controller: viewController?.dateInputController,
+                label: {
+                    Text(viewModel.dateTitle)
+                }
+            ).onChange { [weak viewController] date in
+                viewController?
+                    .interactor?
+                    .proceedDateInput(request: .init(date: date))
+            }
+            
+            
+            DateInput(
+                controller: viewController?.timeInputController,
+                displayedComponents: [.hourAndMinute]
+            ) {
+                Text(viewModel.timeTitle)
+            }.onChange { [weak viewController] date in
+                viewController?
+                    .interactor?
+                    .proceedDateInput(request: .init(date: date))
             }
             
             HStack {
-                Text("Time")
+                Text(viewModel.unitTitle)
                 Spacer()
-                Text("\(viewModel.date)")
-            }
-            
-            HStack {
-                Text(viewModel.unitLabel)
-                Spacer()
-                TextInput(controller:viewController?.textInputController)
-                    .onTextChange { text in
-                        viewController?.interactor?.proceedTextInput(
+                TextInput(
+                    placeholder: "value",
+                    controller:viewController?.textInputController
+                )
+                .onTextChange { [weak viewController] text in
+                    viewController?
+                        .interactor?
+                        .proceedTextInput(
                             request: .init(text: text)
                         )
-                    }
-                    .frame(maxWidth: 80)
-                    .keyboardType(.decimalPad)
+                }
+                .frame(maxWidth: 80)
+                .keyboardType(.decimalPad)
             }
         }
     }
@@ -145,10 +187,9 @@ struct HealthInputFormView_Previews: PreviewProvider {
 }
 
 fileprivate let sceneViewModel = HealthInputFormSceneViewModel(
-    date: Date().toString(),
-    time: (hour: 14, minute: 23),
-    value: 84,
-    unitLabel: "kg"
+    dateTitle: "Date Ja",
+    timeTitle: "Time Ja",
+    unitTitle: "KG"
 )
 
 
