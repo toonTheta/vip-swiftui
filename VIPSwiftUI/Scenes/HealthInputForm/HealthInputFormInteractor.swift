@@ -45,10 +45,14 @@ final class HealthInputFormInteractor: HealthInputFormBusinessLogic, HealthInput
     func prepareData(request: HealthInputForm.PrepareData.Request) {
         switch sceneOption {
         case let .add(recordType):
+            inputDate = Date()
+            inputText = ""
+            
             presenter.presentPreparedData(response: .init(
-                date: Date(),
+                date: inputDate ?? Date(),
                 value: nil,
-                recordType: recordType
+                recordType: recordType,
+                addButtonEnabled: shouldButtonEnabled()
             ))
             break
         case let .edit(record):
@@ -58,11 +62,15 @@ final class HealthInputFormInteractor: HealthInputFormBusinessLogic, HealthInput
     
     func proceedTextInput(request: HealthInputForm.ProceedTextInput.Request) {
         inputText = request.text
-        let buttonEnabled = inputText?.isEmpty == false
+        let buttonEnabled = shouldButtonEnabled()
         presenter.presentProceedTextInput(response: .init(addButtonEnabled: buttonEnabled))
     }
     
     func proceedDateInput(request: HealthInputForm.ProceedDateInput.Request) {
         inputDate = request.date
+    }
+    
+    func shouldButtonEnabled() -> Bool {
+        return inputText?.isEmpty == false && inputDate != nil
     }
 }

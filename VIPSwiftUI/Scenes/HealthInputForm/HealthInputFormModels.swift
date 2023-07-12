@@ -26,6 +26,8 @@ enum HealthInputForm {
             let date: Date
             let value: Double?
             let recordType: HealthRecordType
+            
+            let addButtonEnabled: Bool
         }
 
         struct ViewModel {
@@ -35,6 +37,8 @@ enum HealthInputForm {
             
             let dateValue: Date
             let textValue: String
+            
+            let addButtonEnabled: Bool
         }
     }
     

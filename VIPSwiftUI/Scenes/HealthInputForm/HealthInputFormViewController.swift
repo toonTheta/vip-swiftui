@@ -74,6 +74,8 @@ final class HealthInputFormViewController: BaseUIViewController, HealthInputForm
         dateInputController.updateDate(viewModel.dateValue)
         timeInputController.updateDate(viewModel.dateValue)
         textInputController.updateText(viewModel.textValue)
+        
+        setAddButtonEnabled(viewModel.addButtonEnabled)
     }
     
     func displayProceedTextInput(viewModel: HealthInputForm.ProceedTextInput.ViewModel) {
@@ -120,6 +122,7 @@ private extension HealthInputFormViewController {
         else { return }
         
         delegate?.didSubmitHealthInputData(withValue: doubleValue, date: date)
+        dismiss(animated: true)
     }
     
     func setAddButtonEnabled(_ enabled: Bool) {
@@ -172,6 +175,7 @@ struct HealthInputFormView: View {
                             request: .init(text: text)
                         )
                 }
+                .multilineTextAlignment(.trailing)
                 .frame(maxWidth: 80)
                 .keyboardType(.decimalPad)
             }

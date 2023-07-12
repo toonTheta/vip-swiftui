@@ -31,13 +31,14 @@ final class HealthInputFormPresenter: HealthInputFormPresentationLogic {
         self.worker = worker
     }
     
-    func presentPreparedData(response: HealthInputForm.PrepareData.Response) {        
+    func presentPreparedData(response: HealthInputForm.PrepareData.Response) {
         viewController?.displayPreparedData(viewModel: .init(
             dateTitle: "Date",
             timeTitle: "Time",
             unitTitle: worker.mapUnitLabel(recordType: response.recordType),
             dateValue: response.date,
-            textValue: response.value.flatMap { "\($0)" } ?? ""
+            textValue: response.value.flatMap { "\($0)" } ?? "",
+            addButtonEnabled: response.addButtonEnabled
         ))
     }
     
