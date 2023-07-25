@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		8718A0712A5DC0EE00AA8087 /* DateInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8718A0702A5DC0EE00AA8087 /* DateInput.swift */; };
+		8718A0732A5EBCA700AA8087 /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8718A0722A5EBCA700AA8087 /* Array+Extension.swift */; };
+		8718A0762A5EC4CB00AA8087 /* LineGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8718A0752A5EC4CB00AA8087 /* LineGraph.swift */; };
+		8718A0782A5ECA2F00AA8087 /* Display.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8718A0772A5ECA2F00AA8087 /* Display.swift */; };
 		874078DC2A58239A0056A07F /* TextInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874078DB2A58239A0056A07F /* TextInput.swift */; };
 		874078DE2A582AF30056A07F /* Callback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874078DD2A582AF30056A07F /* Callback.swift */; };
 		8744E8382A55841E001CC05E /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8744E8372A55841E001CC05E /* View+Extension.swift */; };
@@ -72,6 +75,9 @@
 
 /* Begin PBXFileReference section */
 		8718A0702A5DC0EE00AA8087 /* DateInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateInput.swift; sourceTree = "<group>"; };
+		8718A0722A5EBCA700AA8087 /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
+		8718A0752A5EC4CB00AA8087 /* LineGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineGraph.swift; sourceTree = "<group>"; };
+		8718A0772A5ECA2F00AA8087 /* Display.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Display.swift; sourceTree = "<group>"; };
 		874078DB2A58239A0056A07F /* TextInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextInput.swift; sourceTree = "<group>"; };
 		874078DD2A582AF30056A07F /* Callback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Callback.swift; sourceTree = "<group>"; };
 		8744E8372A55841E001CC05E /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
@@ -146,6 +152,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8718A0742A5EC4BE00AA8087 /* views */ = {
+			isa = PBXGroup;
+			children = (
+				8718A0752A5EC4CB00AA8087 /* LineGraph.swift */,
+			);
+			path = views;
+			sourceTree = "<group>";
+		};
 		874078DA2A5823910056A07F /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -167,7 +181,9 @@
 			isa = PBXGroup;
 			children = (
 				875C9E372A51D580009D2552 /* Date+Extension.swift */,
+				8718A0722A5EBCA700AA8087 /* Array+Extension.swift */,
 				8744E8372A55841E001CC05E /* View+Extension.swift */,
+				8718A0772A5ECA2F00AA8087 /* Display.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -175,6 +191,7 @@
 		875C9E392A51D81F009D2552 /* HealthDetail */ = {
 			isa = PBXGroup;
 			children = (
+				8718A0742A5EC4BE00AA8087 /* views */,
 				875C9E3A2A51D834009D2552 /* HealthDetailPresenterWorker.swift */,
 				875C9E3B2A51D834009D2552 /* HealthDetailPresenter.swift */,
 				875C9E3C2A51D834009D2552 /* HealthDetailWorker.swift */,
@@ -451,6 +468,7 @@
 				875C9E4E2A51DCF8009D2552 /* CategoryResponse.swift in Sources */,
 				875C9E382A51D580009D2552 /* Date+Extension.swift in Sources */,
 				875C9E472A51D834009D2552 /* HealthDetailViewController.swift in Sources */,
+				8718A0762A5EC4CB00AA8087 /* LineGraph.swift in Sources */,
 				87E122972A5817A40014D03F /* HealthInputFormSceneViewModel.swift in Sources */,
 				877AA4F72A4EB97800D63011 /* DashboardSceneViewModel.swift in Sources */,
 				877AA4F22A4E9FB600D63011 /* DashboardModels.swift in Sources */,
@@ -461,6 +479,7 @@
 				874078DC2A58239A0056A07F /* TextInput.swift in Sources */,
 				877050002A5725A200A85311 /* QueryService.swift in Sources */,
 				875C9E462A51D834009D2552 /* HealthDetailModels.swift in Sources */,
+				8718A0732A5EBCA700AA8087 /* Array+Extension.swift in Sources */,
 				877AA4F42A4E9FB600D63011 /* DashboardInteractor.swift in Sources */,
 				877AA4F32A4E9FB600D63011 /* DashboardViewController.swift in Sources */,
 				87704FFD2A5724D000A85311 /* Model.xcdatamodeld in Sources */,
@@ -472,6 +491,7 @@
 				87E1228E2A5816700014D03F /* HealthInputFormPresenterWorker.swift in Sources */,
 				877AA4B52A4E9F8100D63011 /* AppDelegate.swift in Sources */,
 				875C9E482A51D834009D2552 /* HealthDetailInteractor.swift in Sources */,
+				8718A0782A5ECA2F00AA8087 /* Display.swift in Sources */,
 				877AA4F12A4E9FB600D63011 /* DashboardRouter.swift in Sources */,
 				8744E8382A55841E001CC05E /* View+Extension.swift in Sources */,
 				875C9E452A51D834009D2552 /* HealthDetailRouter.swift in Sources */,
