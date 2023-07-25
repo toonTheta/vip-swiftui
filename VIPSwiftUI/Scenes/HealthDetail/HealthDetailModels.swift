@@ -10,6 +10,8 @@
 //  see http://clean-swift.com
 //
 
+import Foundation
+
 enum HealthDetail {
 
     enum FetchDetail {
@@ -18,18 +20,23 @@ enum HealthDetail {
         struct Response {
             let recordType: HealthRecordType
             let records: [HealthRecord]
+            
+            let updateWithAnimation: Bool
         }
 
         struct ViewModel {
             // graph
             let unit: String
-            let records: [HealthRecordViewModel]
+            let records: Display<[HealthRecordViewModel]>
+            
+            let updateWithAnimation: Bool
         }
     }
     
     enum AddDetail {
         struct Request {
             let value: Double
+            let date: Date
         }
         
         struct Response {
@@ -38,6 +45,18 @@ enum HealthDetail {
         
         struct ViewModel {
             let records: [HealthRecordViewModel]
+        }
+    }
+    
+    enum RemoveDetail {
+        struct Request {
+            let indexSet: IndexSet
+        }
+        
+        struct Response {  
+        }
+        
+        struct ViewModel {
         }
     }
 }

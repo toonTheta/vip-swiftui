@@ -22,7 +22,7 @@ final class HealthDetailViewController: BaseUIViewController, HealthDetailDispla
     var router: (HealthDetailRoutingLogic & HealthDetailDataPassing)?
     
     private let sceneViewModel = HealthDetailSceneViewModel(
-        records: [],
+        records: .hidden,
         unit: ""
     )
     
@@ -52,8 +52,15 @@ final class HealthDetailViewController: BaseUIViewController, HealthDetailDispla
     }
     
     func displayDetail(viewModel: HealthDetail.FetchDetail.ViewModel) {
-        sceneViewModel.records = viewModel.records
-         sceneViewModel.unit = viewModel.unit
+        sceneViewModel.unit = viewModel.unit
+        
+        if viewModel.updateWithAnimation {
+            withAnimation {
+                sceneViewModel.records = viewModel.records
+            }
+        } else {
+            sceneViewModel.records = viewModel.records
+        }
     }
 }
 
@@ -91,7 +98,9 @@ private extension HealthDetailViewController {
 
 extension HealthDetailViewController: HealthInputFormViewControllerDelegate {
     func didSubmitHealthInputData(withValue value: Double, date: Date) {
-        print("### DEBUG: \(value), \(date)")
+        interactor?.addDetail(
+            request: .init(value: value, date: date)
+        )
     }
 }
 
@@ -100,18 +109,26 @@ struct HealthDetailScreenSwiftUIView: View {
     @ObservedObject var viewModel: HealthDetailSceneViewModel
     
     var body: some View {
-        List {
-            
-            Section {
-                Text("Graph")
-            }
-            
-            Section(header: Text(viewModel.unit)) {
-                ForEach(viewModel.records, id: \.id) { item in
-                    Text("\(item.value)")
+        viewModel.records.when(
+            visible: { records in
+                List {
+                    Section {
+                        LineChartView(data: records)
+                    }
+                    Section(header: Text(viewModel.unit)) {
+                        ForEach(records, id: \.id) { item in
+                            Text("\(item.stringValue)")
+                        }
+                        .onDelete { indexSet in
+                            interactor?.removeDetail(request: .init(indexSet: indexSet))
+                        }
+                    }
                 }
+            },
+            hidden: {
+                Text("No Data")
             }
-        }
+        )
     }
 }
 
@@ -120,7 +137,7 @@ struct HealthDetailScreenSwiftUIView_Previews: PreviewProvider {
         HealthDetailScreenSwiftUIView(
             interactor: nil,
             viewModel: .init(
-                records: _records,
+                records: .visible(_records),
                 unit: "KG"
             )
         )
@@ -128,22 +145,28 @@ struct HealthDetailScreenSwiftUIView_Previews: PreviewProvider {
 }
 
 fileprivate let _records: [HealthRecordViewModel] = [
-    .init(
-        id: .init(),
-        value: 12,
-        createdDate: Date(),
+    HealthRecordViewModel(
+        id: UUID(),
+        value: 20,
+        createdDate: Date.fromString("2023/01/01 10:30"),
         type: .weight
     ),
-    .init(
-        id: .init(),
-        value: 12,
-        createdDate: Date(),
+    HealthRecordViewModel(
+        id: UUID(),
+        value: 22,
+        createdDate: Date.fromString("2023/02/01 10:30"),
         type: .weight
     ),
-    .init(
-        id: .init(),
-        value: 12,
-        createdDate: Date(),
+    HealthRecordViewModel(
+        id: UUID(),
+        value: 19,
+        createdDate: Date.fromString("2023/03/01 10:30"),
+        type: .weight
+    ),
+    HealthRecordViewModel(
+        id: UUID(),
+        value: 21,
+        createdDate: Date.fromString("2023/04/01 10:30"),
         type: .weight
     )
 ]

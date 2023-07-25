@@ -8,10 +8,10 @@
 import Foundation
 
 class HealthDetailSceneViewModel: ObservableObject {
-    @Published var records: [HealthRecordViewModel] = []
+    @Published var records: Display<[HealthRecordViewModel]> = .hidden
     @Published var unit: String
     
-    init(records: [HealthRecordViewModel], unit: String) {
+    init(records: Display<[HealthRecordViewModel]>, unit: String) {
         self.records = records
         self.unit = unit
     }
@@ -20,12 +20,14 @@ class HealthDetailSceneViewModel: ObservableObject {
 struct HealthRecordViewModel {
     let id: UUID
     let value: Double
+    let stringValue: String
     let createdDate: Date
     let type: HealthRecordType
     
     init(id: UUID, value: Double, createdDate: Date, type: HealthRecordType) {
         self.id = id
         self.value = value
+        self.stringValue = String(format: "%.1f", value)
         self.createdDate = createdDate
         self.type = type
     }
@@ -35,6 +37,7 @@ struct HealthRecordViewModel {
         
         self.id = id
         self.value = value
+        self.stringValue = String(format: "%.1f", value)
         self.createdDate = createdDate
         self.type = type
     }

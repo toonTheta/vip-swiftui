@@ -39,7 +39,8 @@ final class HealthDetailPresenter: HealthDetailPresentationLogic {
         viewController?.displayDetail(
             viewModel: .init(
                 unit: worker.getUnit(ofType: response.recordType),
-                records: recordViewModel
+                records: recordViewModel.isEmpty ? .hidden : .visible(recordViewModel),
+                updateWithAnimation: response.updateWithAnimation
             )
         )
     }

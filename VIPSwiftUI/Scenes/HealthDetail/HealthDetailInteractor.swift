@@ -15,6 +15,7 @@ import Foundation
 protocol HealthDetailBusinessLogic {
     func fetchDetail(request: HealthDetail.FetchDetail.Request)
     func addDetail(request: HealthDetail.AddDetail.Request)
+    func removeDetail(request: HealthDetail.RemoveDetail.Request)
 }
 
 protocol HealthDetailDataStore {
@@ -27,6 +28,8 @@ final class HealthDetailInteractor: HealthDetailBusinessLogic, HealthDetailDataS
     
     private(set) var recordType: HealthRecordType!
     private let healthService: HealthServiceProtocol
+    
+    private var records: [HealthRecord] = []
 
     init(
         worker: HealthDetailWorkerProtocol = HealthDetailWorker(),
@@ -41,28 +44,41 @@ final class HealthDetailInteractor: HealthDetailBusinessLogic, HealthDetailDataS
     }
     
     func fetchDetail(request: HealthDetail.FetchDetail.Request) {
-        refreshDetail()
+        refreshDetail(updateWithAnimation: true)
     }
     
     func addDetail(request: HealthDetail.AddDetail.Request) {
         healthService.createHealthRecord(
             id: UUID(),
             value: request.value,
-            createdDate: Date(),
+            createdDate: request.date,
             type: recordType
         )
         
-        refreshDetail()
+        refreshDetail(updateWithAnimation: true)
     }
     
-    func refreshDetail() {
+    func removeDetail(request: HealthDetail.RemoveDetail.Request) {
+        let recordsToDelete = records.elements(at: request.indexSet).compactMap { $0 }
+        
+        recordsToDelete.forEach {
+            print($0.value)
+            healthService.deleteHealthRecord(record: $0)
+        }
+        
+        refreshDetail(updateWithAnimation: false)
+    }
+    
+    func refreshDetail(updateWithAnimation: Bool) {
         let result = healthService.fetchHealthRecords(ofType: recordType)
         
         switch result {
         case let .success(records):
+            self.records = records
             presenter.presentDetail(response: .init(
                 recordType: recordType,
-                records: records
+                records: records,
+                updateWithAnimation: updateWithAnimation
             ))
         case .failure(_):
             // TODO: Handle error
