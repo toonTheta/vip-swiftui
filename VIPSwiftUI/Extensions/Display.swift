@@ -20,29 +20,13 @@ enum Display<T> {
         }
     }
     
-//    func when<U: View>(
-//        @ViewBuilder visible: (T) -> U,
-//        @ViewBuilder hidden: () -> U
-//    ) -> some View {
-//        if let value = value {
-//            return visible(value)
-//        } else {
-//            return hidden()
-//        }
-//    }
-    
     @ViewBuilder
-        func when(@ViewBuilder visible: (T) -> some View, @ViewBuilder hidden: () -> some View) -> some View {
-            switch self {
-            case .hidden:
-                return AnyView(hidden())
-            case let .visible(model):
-                return AnyView(visible(model))
-            }
-//            if let value = value {
-//
-//            } else {
-//
-//            }
+    func when(@ViewBuilder visible: (T) -> some View) -> some View {
+        switch self {
+        case .hidden:
+            AnyView(EmptyView())
+        case let .visible(model):
+            AnyView(visible(model))
         }
+    }
 }

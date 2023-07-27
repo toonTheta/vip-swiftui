@@ -14,6 +14,7 @@ import UIKit
 
 protocol HealthDetailRoutingLogic {
     func routeToAddHealthRecord()
+    func routeToEditData(recordId: UUID)
 }
 
 protocol HealthDetailDataPassing {
@@ -30,7 +31,21 @@ final class HealthDetailRouter: HealthDetailRoutingLogic, HealthDetailDataPassin
         
         let inputFormVC = HealthInputFormViewController(
             delegate: viewController,
-            sceneOption: .add(recordType: dataStore.recordType)
+            sceneOption: .adding(recordType: dataStore.recordType)
+        )
+        
+        let navVC = UINavigationController(rootViewController: inputFormVC)
+        
+        viewController?.present(navVC, animated: true)
+    }
+    
+    func routeToEditData(recordId: UUID) {
+        guard let dataStore else { return }
+        
+        
+        let inputFormVC = HealthInputFormViewController(
+            delegate: viewController,
+            sceneOption: .editing(record: dataStore.record(for: recordId))
         )
         
         let navVC = UINavigationController(rootViewController: inputFormVC)

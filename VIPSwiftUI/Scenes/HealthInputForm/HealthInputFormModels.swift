@@ -15,8 +15,8 @@ import Foundation
 enum HealthInputForm {
     
     enum SceneOption {
-        case add(recordType: HealthRecordType)
-        case edit(record: HealthRecord)
+        case adding(recordType: HealthRecordType)
+        case editing(record: HealthRecord)
     }
     
     enum PrepareData {
@@ -48,11 +48,11 @@ enum HealthInputForm {
         }
 
         struct Response {
-            let addButtonEnabled: Bool
+            let saveButtonDisabled: Bool
         }
 
         struct ViewModel {
-            let addButtonEnabled: Bool
+            let saveButtonDisabled: Bool
         }
     }
     

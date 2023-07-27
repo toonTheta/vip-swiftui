@@ -15,6 +15,8 @@ import Foundation
 protocol HealthInputFormBusinessLogic {
     var inputText: String? { get }
     var inputDate: Date? { get }
+    var record: HealthRecord? { get }
+    var sceneOption: HealthInputForm.SceneOption { get }
     
     func prepareData(request: HealthInputForm.PrepareData.Request)
     func proceedTextInput(request: HealthInputForm.ProceedTextInput.Request)
@@ -27,10 +29,16 @@ final class HealthInputFormInteractor: HealthInputFormBusinessLogic, HealthInput
     var presenter: HealthInputFormPresentationLogic
     private var worker: HealthInputFormWorkerProtocol
     
-    private let sceneOption: HealthInputForm.SceneOption
+    private(set) var sceneOption: HealthInputForm.SceneOption
     
     private(set) var inputText: String?
     private(set) var inputDate: Date?
+    
+    var record: HealthRecord? {
+        if case let .editing(record) = sceneOption {
+            return record
+        } else { return nil }
+    }
 
     init(
         worker: HealthInputFormWorkerProtocol = HealthInputFormWorker(),
@@ -44,7 +52,7 @@ final class HealthInputFormInteractor: HealthInputFormBusinessLogic, HealthInput
     
     func prepareData(request: HealthInputForm.PrepareData.Request) {
         switch sceneOption {
-        case let .add(recordType):
+        case let .adding(recordType):
             inputDate = Date()
             inputText = ""
             
@@ -54,16 +62,30 @@ final class HealthInputFormInteractor: HealthInputFormBusinessLogic, HealthInput
                 recordType: recordType,
                 addButtonEnabled: shouldButtonEnabled()
             ))
-            break
-        case let .edit(record):
-            break
+            
+        case let .editing(record):
+            guard
+                let createdDate = record.createdDate,
+                let recordTypeString = record.type,
+                let recordType = HealthRecordType(rawValue: recordTypeString)
+            else { return }
+            
+            inputDate = createdDate
+            inputText = "\(record.value)"
+            
+            presenter.presentPreparedData(response: .init(
+                date: inputDate ?? Date(),
+                value: record.value,
+                recordType: recordType,
+                addButtonEnabled: shouldButtonEnabled()
+            ))
         }
     }
     
     func proceedTextInput(request: HealthInputForm.ProceedTextInput.Request) {
         inputText = request.text
-        let buttonEnabled = shouldButtonEnabled()
-        presenter.presentProceedTextInput(response: .init(addButtonEnabled: buttonEnabled))
+        let buttonDisabled = !shouldButtonEnabled()
+        presenter.presentProceedTextInput(response: .init(saveButtonDisabled: buttonDisabled))
     }
     
     func proceedDateInput(request: HealthInputForm.ProceedDateInput.Request) {

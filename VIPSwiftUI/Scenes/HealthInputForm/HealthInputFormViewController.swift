@@ -14,8 +14,8 @@ import UIKit
 import SwiftUI
 
 protocol HealthInputFormViewControllerDelegate: AnyObject {
-    func didSubmitHealthInputData(withValue value: Double, date: Date)
-    
+    func didSubmitHealthInputData(withValue value: Double, date: Date, mode: HealthInputForm.SceneOption)
+    func didPressDelete(record: HealthRecord)
 }
 
 protocol HealthInputFormDisplayLogic: AnyObject {
@@ -26,12 +26,13 @@ protocol HealthInputFormDisplayLogic: AnyObject {
 final class HealthInputFormViewController: BaseUIViewController, HealthInputFormDisplayLogic {
     var interactor: HealthInputFormBusinessLogic?
     var router: (HealthInputFormRoutingLogic & HealthInputFormDataPassing)?
-    var addButton: UIBarButtonItem!
     
     private let sceneViewModel = HealthInputFormSceneViewModel(
         dateTitle: "",
         timeTitle: "",
-        unitTitle: ""
+        unitTitle: "",
+        saveButtonDisabled: true,
+        deleteButtonTitle: .hidden
     )
     
     private(set) var dateInputController = DateInputController()
@@ -56,8 +57,6 @@ final class HealthInputFormViewController: BaseUIViewController, HealthInputForm
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupBarButton()
-        
         loadSwiftUIView(HealthInputFormView(
             viewController: self,
             viewModel: sceneViewModel
@@ -74,12 +73,10 @@ final class HealthInputFormViewController: BaseUIViewController, HealthInputForm
         dateInputController.updateDate(viewModel.dateValue)
         timeInputController.updateDate(viewModel.dateValue)
         textInputController.updateText(viewModel.textValue)
-        
-        setAddButtonEnabled(viewModel.addButtonEnabled)
     }
     
     func displayProceedTextInput(viewModel: HealthInputForm.ProceedTextInput.ViewModel) {
-        setAddButtonEnabled(viewModel.addButtonEnabled)
+        sceneViewModel.saveButtonDisabled = viewModel.saveButtonDisabled
     }
 }
 
@@ -103,30 +100,30 @@ private extension HealthInputFormViewController {
         router.dataStore = interactor
     }
     
-    func setupBarButton() {
-        addButton = UIBarButtonItem(
-            title: "Add",
-            style: .plain,
-            target: self,
-            action: #selector(handleTapAddData)
-        )
-        
-        navigationItem.rightBarButtonItem = addButton
-    }
-    
-    @objc func handleTapAddData() {
+    func handleTapAddData() {
         guard
             let date = interactor?.inputDate,
             let text = interactor?.inputText,
-            let doubleValue = Double(text)
+            let doubleValue = Double(text),
+            let sceneOption = interactor?.sceneOption
         else { return }
         
-        delegate?.didSubmitHealthInputData(withValue: doubleValue, date: date)
+        delegate?.didSubmitHealthInputData(
+            withValue: doubleValue,
+            date: date,
+            mode: sceneOption
+        )
+        
         dismiss(animated: true)
     }
     
-    func setAddButtonEnabled(_ enabled: Bool) {
-        addButton.isEnabled = enabled
+    func handleTapDeleteData() {
+        guard
+            let record = interactor?.record
+        else { return }
+        
+        delegate?.didPressDelete(record: record)
+        dismiss(animated: true)
     }
 }
 
@@ -136,8 +133,7 @@ struct HealthInputFormView: View {
     @State private var birthDate = Date.now
     
     var body: some View {
-        List {
-            
+        Form {
             DateInput(
                 controller: viewController?.dateInputController,
                 label: {
@@ -179,6 +175,23 @@ struct HealthInputFormView: View {
                 .frame(maxWidth: 80)
                 .keyboardType(.decimalPad)
             }
+            
+            Section {
+                Button("Save") { [weak viewController] in
+                    viewController?.handleTapAddData()
+                }
+                .disabled(viewModel.saveButtonDisabled)
+                .frame(maxWidth: .infinity) // center the button
+            }
+            
+            Section {
+                viewModel.deleteButtonTitle.when(visible: { title in
+                    Button(title, role: .destructive) { [weak viewController] in
+                        viewController?.handleTapAddData()
+                    }
+                    .frame(maxWidth: .infinity) // center the button
+                })
+            }
         }
     }
 }
@@ -193,7 +206,9 @@ struct HealthInputFormView_Previews: PreviewProvider {
 fileprivate let sceneViewModel = HealthInputFormSceneViewModel(
     dateTitle: "Date Ja",
     timeTitle: "Time Ja",
-    unitTitle: "KG"
+    unitTitle: "KG",
+    saveButtonDisabled: true,
+    deleteButtonTitle: .visible("Delete Ja")
 )
 
 

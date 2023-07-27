@@ -22,7 +22,7 @@ final class HealthDetailViewController: BaseUIViewController, HealthDetailDispla
     var router: (HealthDetailRoutingLogic & HealthDetailDataPassing)?
     
     private let sceneViewModel = HealthDetailSceneViewModel(
-        records: .hidden,
+        state: .empty,
         unit: ""
     )
     
@@ -45,7 +45,7 @@ final class HealthDetailViewController: BaseUIViewController, HealthDetailDispla
         
         loadSwiftUIView(
             HealthDetailScreenSwiftUIView(
-                interactor: interactor,
+                viewController: self,
                 viewModel: sceneViewModel
             )
         )
@@ -56,11 +56,15 @@ final class HealthDetailViewController: BaseUIViewController, HealthDetailDispla
         
         if viewModel.updateWithAnimation {
             withAnimation {
-                sceneViewModel.records = viewModel.records
+                sceneViewModel.state = viewModel.state
             }
         } else {
-            sceneViewModel.records = viewModel.records
+            sceneViewModel.state = viewModel.state
         }
+    }
+    
+    func handleTapRecord(_ id: UUID) {
+        router?.routeToEditData(recordId: id)
     }
 }
 
@@ -97,20 +101,31 @@ private extension HealthDetailViewController {
 }
 
 extension HealthDetailViewController: HealthInputFormViewControllerDelegate {
-    func didSubmitHealthInputData(withValue value: Double, date: Date) {
-        interactor?.addDetail(
-            request: .init(value: value, date: date)
+    func didSubmitHealthInputData(
+        withValue value: Double,
+        date: Date,
+        mode: HealthInputForm.SceneOption
+    ) { 
+        interactor?.submitRecord(
+            request: .init(value: value, date: date, mode: mode)
         )
+    }
+    
+    func didPressDelete(record: HealthRecord) {
+        interactor?.removeDetail(request: .init(record: record))
     }
 }
 
 struct HealthDetailScreenSwiftUIView: View {
-    var interactor: HealthDetailBusinessLogic?
+    var viewController: HealthDetailViewController?
     @ObservedObject var viewModel: HealthDetailSceneViewModel
     
     var body: some View {
-        viewModel.records.when(
-            visible: { records in
+        viewModel.state.when(
+            empty: {
+                Text("No Data")
+            },
+            showRecords: { records in
                 List {
                     Section {
                         LineChartView(data: records)
@@ -118,15 +133,12 @@ struct HealthDetailScreenSwiftUIView: View {
                     Section(header: Text(viewModel.unit)) {
                         ForEach(records, id: \.id) { item in
                             Text("\(item.stringValue)")
-                        }
-                        .onDelete { indexSet in
-                            interactor?.removeDetail(request: .init(indexSet: indexSet))
+                                .onPress { [weak viewController] in
+                                    viewController?.handleTapRecord(item.id)
+                                }
                         }
                     }
                 }
-            },
-            hidden: {
-                Text("No Data")
             }
         )
     }
@@ -135,11 +147,8 @@ struct HealthDetailScreenSwiftUIView: View {
 struct HealthDetailScreenSwiftUIView_Previews: PreviewProvider {
     static var previews: some View {
         HealthDetailScreenSwiftUIView(
-            interactor: nil,
-            viewModel: .init(
-                records: .visible(_records),
-                unit: "KG"
-            )
+            viewController: nil,
+            viewModel: .init(state: .empty, unit: "KG")
         )
     }
 }

@@ -6,14 +6,41 @@
 //
 
 import Foundation
+import SwiftUI
 
 class HealthDetailSceneViewModel: ObservableObject {
-    @Published var records: Display<[HealthRecordViewModel]> = .hidden
+    @Published var state: State
     @Published var unit: String
     
-    init(records: Display<[HealthRecordViewModel]>, unit: String) {
-        self.records = records
+    init(state: State, unit: String) {
+        self.state = state
         self.unit = unit
+    }
+    
+    enum State {
+        case empty
+        case showRecords([HealthRecordViewModel])
+        
+        init(value: [HealthRecordViewModel]) {
+            if value.isEmpty {
+                self = .empty
+            } else {
+                self = .showRecords(value)
+            }
+        }
+        
+        @ViewBuilder
+        func when(
+            @ViewBuilder empty: () -> some View,
+            @ViewBuilder showRecords: ([HealthRecordViewModel]) -> some View
+        ) -> some View {
+            switch self {
+            case .empty:
+                AnyView(empty())
+            case let .showRecords(model):
+                AnyView(showRecords(model))
+            }
+        }
     }
 }
 

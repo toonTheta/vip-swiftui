@@ -13,6 +13,7 @@
 import Foundation
 
 enum HealthDetail {
+    typealias SceneViewModel = HealthDetailSceneViewModel
 
     enum FetchDetail {
         struct Request {}
@@ -25,18 +26,17 @@ enum HealthDetail {
         }
 
         struct ViewModel {
-            // graph
             let unit: String
-            let records: Display<[HealthRecordViewModel]>
-            
+            let state: SceneViewModel.State
             let updateWithAnimation: Bool
         }
     }
     
-    enum AddDetail {
+    enum SubmitRecord {
         struct Request {
             let value: Double
             let date: Date
+            let mode: HealthInputForm.SceneOption
         }
         
         struct Response {
@@ -50,7 +50,7 @@ enum HealthDetail {
     
     enum RemoveDetail {
         struct Request {
-            let indexSet: IndexSet
+            let record: HealthRecord
         }
         
         struct Response {  

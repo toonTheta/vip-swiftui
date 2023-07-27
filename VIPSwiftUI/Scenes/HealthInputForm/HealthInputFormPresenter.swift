@@ -43,6 +43,6 @@ final class HealthInputFormPresenter: HealthInputFormPresentationLogic {
     }
     
     func presentProceedTextInput(response: HealthInputForm.ProceedTextInput.Response) {
-        viewController?.displayProceedTextInput(viewModel: .init(addButtonEnabled: response.addButtonEnabled))
+        viewController?.displayProceedTextInput(viewModel: .init(saveButtonDisabled: response.saveButtonDisabled))
     }
 }

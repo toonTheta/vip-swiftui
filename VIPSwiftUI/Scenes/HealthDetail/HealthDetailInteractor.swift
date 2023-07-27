@@ -14,12 +14,15 @@ import Foundation
 
 protocol HealthDetailBusinessLogic {
     func fetchDetail(request: HealthDetail.FetchDetail.Request)
-    func addDetail(request: HealthDetail.AddDetail.Request)
+    func submitRecord(request: HealthDetail.SubmitRecord.Request)
     func removeDetail(request: HealthDetail.RemoveDetail.Request)
+    
 }
 
 protocol HealthDetailDataStore {
     var recordType: HealthRecordType! { get }
+    
+    func record(for id: UUID) -> HealthRecord
 }
 
 final class HealthDetailInteractor: HealthDetailBusinessLogic, HealthDetailDataStore {
@@ -43,28 +46,39 @@ final class HealthDetailInteractor: HealthDetailBusinessLogic, HealthDetailDataS
         self.healthService = healthService
     }
     
+    func record(for id: UUID) -> HealthRecord {
+        return records
+            .first(where: { $0.id == id })!
+    }
+    
     func fetchDetail(request: HealthDetail.FetchDetail.Request) {
         refreshDetail(updateWithAnimation: true)
     }
     
-    func addDetail(request: HealthDetail.AddDetail.Request) {
-        healthService.createHealthRecord(
-            id: UUID(),
-            value: request.value,
-            createdDate: request.date,
-            type: recordType
-        )
+    func submitRecord(request: HealthDetail.SubmitRecord.Request) {
+        switch request.mode {
+        case let .adding(recordType):
+            healthService.createHealthRecord(
+                id: UUID(),
+                value: request.value,
+                createdDate: request.date,
+                type: recordType
+            )
+            
+        case let .editing(record):
+            healthService.updateHealthRecord(
+                record: record,
+                value: request.value,
+                createdDate: request.date,
+                type: recordType
+            )
+        }
         
         refreshDetail(updateWithAnimation: true)
     }
     
     func removeDetail(request: HealthDetail.RemoveDetail.Request) {
-        let recordsToDelete = records.elements(at: request.indexSet).compactMap { $0 }
-        
-        recordsToDelete.forEach {
-            print($0.value)
-            healthService.deleteHealthRecord(record: $0)
-        }
+        healthService.deleteHealthRecord(record: request.record)
         
         refreshDetail(updateWithAnimation: false)
     }
