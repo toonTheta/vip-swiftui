@@ -26,6 +26,8 @@ struct HealthDetailMainView: View {
                             HStack {
                                 Text("\(item.stringValue)")
                                 Spacer()
+                                Text(item.createdDate.toString())
+                                    .foregroundColor(.secondary)
                                 Image(systemName: "chevron.right")
                                     .foregroundColor(.secondary)
                                 
