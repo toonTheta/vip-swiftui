@@ -38,11 +38,12 @@ final class HealthInputFormPresenter: HealthInputFormPresentationLogic {
             unitTitle: worker.mapUnitLabel(recordType: response.recordType),
             dateValue: response.date,
             textValue: response.value.flatMap { "\($0)" } ?? "",
-            addButtonEnabled: response.addButtonEnabled
+            submitButtonDisabled: !response.submitButtonEnabled,
+            deleteButtonDisplay: response.deleteButtonEnabled ? .visible("Delete") : .hidden
         ))
     }
     
     func presentProceedTextInput(response: HealthInputForm.ProceedTextInput.Response) {
-        viewController?.displayProceedTextInput(viewModel: .init(saveButtonDisabled: response.saveButtonDisabled))
+        viewController?.displayProceedTextInput(viewModel: .init(submitButtonDisabled: response.submitButtonDisabled))
     }
 }

@@ -22,10 +22,10 @@ struct CategoryRow: View {
             HStack(alignment: .center) {
                 Text(viewModel.title)
                     .font(.headline)
-                    .foregroundColor(.indigo)
+                    .foregroundColor(.blue)
                 Spacer()
                 Text("\(viewModel.lastUpdated)")
-                    .font(.caption2)
+                    .font(.caption)
                     .foregroundColor(.gray)
                 
             }

@@ -13,7 +13,7 @@ class HealthInputFormSceneViewModel: ObservableObject {
     @Published var unitTitle: String
     
     @Published var saveButtonDisabled: Bool
-    @Published var deleteButtonTitle: Display<String>
+    @Published var deleteButtonDisplay: Display<String>
     
     init(
         dateTitle: String,
@@ -26,6 +26,6 @@ class HealthInputFormSceneViewModel: ObservableObject {
         self.timeTitle = timeTitle
         self.unitTitle = unitTitle
         self.saveButtonDisabled = saveButtonDisabled
-        self.deleteButtonTitle = deleteButtonTitle
+        self.deleteButtonDisplay = deleteButtonTitle
     }
 }

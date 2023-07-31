@@ -132,10 +132,13 @@ struct HealthDetailScreenSwiftUIView: View {
                     }
                     Section(header: Text(viewModel.unit)) {
                         ForEach(records, id: \.id) { item in
-                            Text("\(item.stringValue)")
-                                .onPress { [weak viewController] in
-                                    viewController?.handleTapRecord(item.id)
-                                }
+                            HStack {
+                                Text("\(item.stringValue)")
+                                Spacer()
+                            }
+                            .onPress { [weak viewController] in
+                                viewController?.handleTapRecord(item.id)
+                            }
                         }
                     }
                 }
@@ -148,7 +151,7 @@ struct HealthDetailScreenSwiftUIView_Previews: PreviewProvider {
     static var previews: some View {
         HealthDetailScreenSwiftUIView(
             viewController: nil,
-            viewModel: .init(state: .empty, unit: "KG")
+            viewModel: .init(state: .showRecords(_records), unit: "KG")
         )
     }
 }

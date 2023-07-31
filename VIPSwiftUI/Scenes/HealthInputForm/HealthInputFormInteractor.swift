@@ -60,7 +60,8 @@ final class HealthInputFormInteractor: HealthInputFormBusinessLogic, HealthInput
                 date: inputDate ?? Date(),
                 value: nil,
                 recordType: recordType,
-                addButtonEnabled: shouldButtonEnabled()
+                submitButtonEnabled: shouldButtonEnabled(),
+                deleteButtonEnabled: false
             ))
             
         case let .editing(record):
@@ -77,7 +78,8 @@ final class HealthInputFormInteractor: HealthInputFormBusinessLogic, HealthInput
                 date: inputDate ?? Date(),
                 value: record.value,
                 recordType: recordType,
-                addButtonEnabled: shouldButtonEnabled()
+                submitButtonEnabled: shouldButtonEnabled(),
+                deleteButtonEnabled: true
             ))
         }
     }
@@ -85,7 +87,7 @@ final class HealthInputFormInteractor: HealthInputFormBusinessLogic, HealthInput
     func proceedTextInput(request: HealthInputForm.ProceedTextInput.Request) {
         inputText = request.text
         let buttonDisabled = !shouldButtonEnabled()
-        presenter.presentProceedTextInput(response: .init(saveButtonDisabled: buttonDisabled))
+        presenter.presentProceedTextInput(response: .init(submitButtonDisabled: buttonDisabled))
     }
     
     func proceedDateInput(request: HealthInputForm.ProceedDateInput.Request) {

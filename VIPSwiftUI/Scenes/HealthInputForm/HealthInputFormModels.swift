@@ -27,7 +27,8 @@ enum HealthInputForm {
             let value: Double?
             let recordType: HealthRecordType
             
-            let addButtonEnabled: Bool
+            let submitButtonEnabled: Bool
+            let deleteButtonEnabled: Bool
         }
 
         struct ViewModel {
@@ -38,7 +39,8 @@ enum HealthInputForm {
             let dateValue: Date
             let textValue: String
             
-            let addButtonEnabled: Bool
+            let submitButtonDisabled: Bool
+            let deleteButtonDisplay: Display<String>
         }
     }
     
@@ -48,11 +50,11 @@ enum HealthInputForm {
         }
 
         struct Response {
-            let saveButtonDisabled: Bool
+            let submitButtonDisabled: Bool
         }
 
         struct ViewModel {
-            let saveButtonDisabled: Bool
+            let submitButtonDisabled: Bool
         }
     }
     

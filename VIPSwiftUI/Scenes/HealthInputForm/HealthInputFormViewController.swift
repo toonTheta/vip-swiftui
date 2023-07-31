@@ -69,14 +69,17 @@ final class HealthInputFormViewController: BaseUIViewController, HealthInputForm
         sceneViewModel.dateTitle = viewModel.dateTitle
         sceneViewModel.timeTitle = viewModel.timeTitle
         sceneViewModel.unitTitle = viewModel.unitTitle
+        sceneViewModel.saveButtonDisabled = viewModel.submitButtonDisabled
+        sceneViewModel.deleteButtonDisplay = viewModel.deleteButtonDisplay
         
         dateInputController.updateDate(viewModel.dateValue)
         timeInputController.updateDate(viewModel.dateValue)
         textInputController.updateText(viewModel.textValue)
+        
     }
     
     func displayProceedTextInput(viewModel: HealthInputForm.ProceedTextInput.ViewModel) {
-        sceneViewModel.saveButtonDisabled = viewModel.saveButtonDisabled
+        sceneViewModel.saveButtonDisabled = viewModel.submitButtonDisabled
     }
 }
 
@@ -130,7 +133,7 @@ private extension HealthInputFormViewController {
 struct HealthInputFormView: View {
     weak var viewController: HealthInputFormViewController?
     @ObservedObject var viewModel: HealthInputFormSceneViewModel
-    @State private var birthDate = Date.now
+    @State private var birthDate = Date()
     
     var body: some View {
         Form {
@@ -184,14 +187,15 @@ struct HealthInputFormView: View {
                 .frame(maxWidth: .infinity) // center the button
             }
             
-            Section {
-                viewModel.deleteButtonTitle.when(visible: { title in
-                    Button(title, role: .destructive) { [weak viewController] in
-                        viewController?.handleTapAddData()
+            viewModel.deleteButtonDisplay.when(visible: { title in
+                Section {
+                    Button(title) { [weak viewController] in
+                        viewController?.handleTapDeleteData()
                     }
                     .frame(maxWidth: .infinity) // center the button
-                })
-            }
+                }.foregroundColor(.red)
+            })
+            
         }
     }
 }

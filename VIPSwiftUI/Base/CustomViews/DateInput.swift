@@ -38,8 +38,8 @@ struct DateInput<Content: View>: View {
 }
 
 class DateInputController: ObservableObject {
-    @Published private(set) var date: Date = .now
-    @Published fileprivate var userInputDate: Date = .now
+    @Published private(set) var date: Date = Date()
+    @Published fileprivate var userInputDate: Date = Date()
     
     func updateDate(_ date: Date) {
         self.date = date

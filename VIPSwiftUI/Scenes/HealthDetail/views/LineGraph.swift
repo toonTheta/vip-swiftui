@@ -13,14 +13,15 @@ struct LineChartView: View {
     
     var body: some View {
         VStack {
-            Chart {
-                ForEach(data, id: \.id) { item in
-                    LineMark(
-                        x: .value("Date", item.createdDate),
-                        y: .value("Value", item.value)
-                    )
-                }
-            }
+            Text("TODO chart")
+//            Chart {
+//                ForEach(data, id: \.id) { item in
+//                    LineMark(
+//                        x: .value("Date", item.createdDate),
+//                        y: .value("Value", item.value)
+//                    )
+//                }
+//            }
             .frame(height: 300)
         }
     }
