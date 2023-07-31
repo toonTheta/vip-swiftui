@@ -39,12 +39,6 @@ class DashboardViewController: BaseUIViewController, DashboardDisplayLogic {
                 viewModel: viewModel
             )
         )
-        
-        interactor.fetchCateogory(request: .init())
-    }
-    
-    func setText() {
-        textController.updateText("TESTTT")
     }
 
     func displayCategory(categoryItems: [CategoryRowViewModel]) {
@@ -53,6 +47,12 @@ class DashboardViewController: BaseUIViewController, DashboardDisplayLogic {
     
     func displayTapCategory(viewModel: Dashboard.TapCategory.ViewModel) {
         router.routeToHealthDetail(type: viewModel.categoryType)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        interactor.fetchCateogory(request: .init())
     }
 }
 
@@ -64,7 +64,10 @@ private extension DashboardViewController {
             viewController: self
         )
         
-        interactor = DashboardInteractor(presenter: presenter)
+        interactor = DashboardInteractor(
+            presenter: presenter,
+            healthService: QueryService.shared
+        )
     }
 }
 
@@ -74,7 +77,7 @@ struct DashboardScreenSwiftUIView: View {
     
     var body: some View {
         List {
-            ForEach(categoryViewModel, id: \.category) { model in
+            ForEach(viewModel.categoryItems, id: \.category) { model in
                 CategoryRow(
                     viewModel: model
                 ).onPress {
@@ -91,14 +94,20 @@ fileprivate let categoryViewModel: [CategoryRowViewModel] = [
     .init(
         title: "Weight",
         value: "84 kg",
-        lastUpdated: Date().toString(),
+        lastUpdated: .init(value: Date().toString()),
         category: .weight
     ),
     .init(
         title: "Body Mass Index",
         value: "21",
-        lastUpdated: Date().toString(),
+        lastUpdated: .init(value: Date().toString()),
         category: .bodyMassIndex
+    ),
+    .init(
+        title: "Height",
+        value: "No Data",
+        lastUpdated: .hidden,
+        category: .height
     ),
 ]
 

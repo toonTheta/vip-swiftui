@@ -84,7 +84,7 @@ final class HealthDetailInteractor: HealthDetailBusinessLogic, HealthDetailDataS
     }
     
     func refreshDetail() {
-        let result = healthService.fetchHealthRecords(ofType: recordType)
+        let result = healthService.fetchHealthRecords(of: recordType)
         
         switch result {
         case let .success(records):

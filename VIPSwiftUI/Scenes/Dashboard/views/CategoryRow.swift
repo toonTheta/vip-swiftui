@@ -10,7 +10,7 @@ import SwiftUI
 struct CategoryRowViewModel {
     let title: String
     let value: String
-    let lastUpdated: String
+    let lastUpdated: Display<String>
     let category: HealthRecordType
 }
 
@@ -22,12 +22,16 @@ struct CategoryRow: View {
             HStack(alignment: .center) {
                 Text(viewModel.title)
                     .font(.headline)
-                    .foregroundColor(.blue)
+                    .foregroundColor(.purple)
                 Spacer()
-                Text("\(viewModel.lastUpdated)")
-                    .font(.caption)
-                    .foregroundColor(.gray)
                 
+                viewModel.lastUpdated.when(
+                    visible: { date in
+                        Text("\(date)")
+                            .font(.caption)
+                            .foregroundColor(.gray)
+                    }
+                )
             }
             
             Text(viewModel.value)
@@ -41,7 +45,7 @@ struct CategoryRow_Previews: PreviewProvider {
     static private let weightViewModel = CategoryRowViewModel(
         title: "Weight",
         value: "84",
-        lastUpdated: Date().toString(),
+        lastUpdated: .init(value: Date().toString()),
         category: .weight
     )
     

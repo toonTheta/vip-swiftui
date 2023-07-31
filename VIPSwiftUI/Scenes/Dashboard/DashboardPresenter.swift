@@ -31,7 +31,9 @@ class DashboardPresenter: DashboardPresentationLogic {
     }
 
     func presentCategory(response: Dashboard.FetchCategory.Response) {
-        viewController?.displayCategory(categoryItems: worker.mapCategoryRow(from: response.recentCategoryResponse))
+        viewController?.displayCategory(
+            categoryItems: worker.mapCategoryRow(from: response.recentCategoryResponse)
+        )
     }
     
     func presentTapCategory(response: Dashboard.TapCategory.Response) {

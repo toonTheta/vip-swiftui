@@ -19,19 +19,39 @@ protocol DashboardBusinessLogic {
 
 class DashboardInteractor: DashboardBusinessLogic {    
     var presenter: DashboardPresenter?
+    
+    private let healthService: HealthServiceProtocol
+    private let recordTypes: [HealthRecordType] =  [.height, .weight, .bodyFatPercentage, .bodyMassIndex]
 
-    init(presenter: DashboardPresenter) {
+    init(
+        presenter: DashboardPresenter,
+        healthService: HealthServiceProtocol
+    ) {
         self.presenter = presenter
+        self.healthService = healthService
     }
     
     func fetchCateogory(request: Dashboard.FetchCategory.Request) {
-        let mockResponse: [CategoryResponse] = [
-            .init(value: "84 kg", lastUpdate: Date(), type: .weight),
-            .init(value: "21", lastUpdate: Date(), type: .bodyMassIndex)
-        ]
+        let lastRecords: [CategoryResponse] = recordTypes.map { type in
+            let result = healthService.fetchLastRecord(of: type)
+            switch result {
+            case let .success(record):
+                return .init(
+                    value: String(format: "%.1f", record.value),
+                    lastUpdate: record.createdDate!,
+                    type: type
+                )
+            case .failure:
+                return .init(
+                    value: nil,
+                    lastUpdate: nil,
+                    type: type
+                )
+            }
+        }
         
         presenter?.presentCategory(response: .init(
-            recentCategoryResponse: mockResponse
+            recentCategoryResponse: lastRecords
         ))
     }
     

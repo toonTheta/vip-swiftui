@@ -27,9 +27,12 @@ protocol HealthServiceProtocol {
     
     func fetchHealthRecords() -> Result<[HealthRecord], HealthRecordError>
     
+    
     func fetchHealthRecords(
-        ofType type: HealthRecordType
+        of type: HealthRecordType
     ) -> Result<[HealthRecord], HealthRecordError>
+    
+    func fetchLastRecord(of type: HealthRecordType) -> Result<HealthRecord, HealthRecordError>
     
     @discardableResult
     func updateHealthRecord(
@@ -82,7 +85,7 @@ extension QueryService: HealthServiceProtocol {
     
     // READ with condition
     func fetchHealthRecords(
-        ofType type: HealthRecordType
+        of type: HealthRecordType
     ) -> Result<[HealthRecord], HealthRecordError> {
         let request = NSFetchRequest<HealthRecord>(entityName: "HealthRecord")
         request.predicate = NSPredicate(format: "type == %@", type.rawValue as CVarArg)
@@ -90,6 +93,26 @@ extension QueryService: HealthServiceProtocol {
         do {
             let result = try context.fetch(request)
             return .success(result)
+        } catch {
+            print("Failed fetching")
+            return .failure(.fetchFailed)
+        }
+    }
+    
+    
+    func fetchLastRecord(of type: HealthRecordType) -> Result<HealthRecord, HealthRecordError> {
+        let request = NSFetchRequest<HealthRecord>(entityName: "HealthRecord")
+        request.predicate = NSPredicate(format: "type == %@", type.rawValue as CVarArg)
+        request.sortDescriptors = [NSSortDescriptor(key: "createdDate", ascending: false)]
+        request.fetchLimit = 1
+        
+        do {
+            let result = try context.fetch(request)
+            if let record = result.first {
+                return .success(record)
+            } else {
+                return .failure(.fetchFailed)
+            }
         } catch {
             print("Failed fetching")
             return .failure(.fetchFailed)

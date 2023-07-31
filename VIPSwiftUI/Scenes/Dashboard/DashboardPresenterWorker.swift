@@ -17,8 +17,7 @@ protocol CounterPresenterWorkerProtocol {
 final class DashboardPresenterWorker: CounterPresenterWorkerProtocol {
     func mapCategoryRow(from response: [CategoryResponse]) -> [CategoryRowViewModel] {
         return response
-            .filter { $0.value != nil && $0.lastUpdate != nil }
-            .map { (getTitle(for: $0.type), $0.value! , $0.lastUpdate!.toString(), $0.type) }
+            .map { (getTitle(for: $0.type), $0.value ?? "No Data" , .init(value: $0.lastUpdate?.toString()), $0.type) }
             .map(CategoryRowViewModel.init)
     }
 }
