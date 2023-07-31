@@ -88,10 +88,11 @@ final class HealthDetailInteractor: HealthDetailBusinessLogic, HealthDetailDataS
         
         switch result {
         case let .success(records):
-            self.records = records
+            self.records = records.sorted(by: { $0.createdDate! < $1.createdDate! })
+            
             presenter.presentDetail(response: .init(
                 recordType: recordType,
-                records: records,
+                records: self.records,
                 updateWithAnimation: updateWithAnimation
             ))
         case .failure(_):

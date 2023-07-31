@@ -10,19 +10,22 @@ import Charts
 
 struct LineChartView: View {
     let data: [HealthRecordViewModel]
-    
+
     var body: some View {
         VStack {
-            Text("TODO chart")
-//            Chart {
-//                ForEach(data, id: \.id) { item in
-//                    LineMark(
-//                        x: .value("Date", item.createdDate),
-//                        y: .value("Value", item.value)
-//                    )
-//                }
-//            }
-            .frame(height: 300)
+            if #available(iOS 16.0, *) {
+                Chart {
+                    ForEach(data, id: \.id) { item in
+                        LineMark(
+                            x: .value("Date", item.createdDate),
+                            y: .value("Value", item.value)
+                        )
+                    }
+                }
+                .frame(height: 300)
+            } else {
+                Text("Please run on iOS 16 above to see chart")
+            }
         }
     }
 }
@@ -30,7 +33,7 @@ struct LineChartView: View {
 struct LineChartView_Preview: PreviewProvider {
     static var previews: some View {
         return LineChartView(data: sampleData)
-            .previewLayout(.fixed(width: 400, height: 260))
+//            .previewLayout(.fixed(width: 400, height: 260))
     }
 }
 
@@ -43,13 +46,13 @@ fileprivate let sampleData: [HealthRecordViewModel] = [
     ),
     HealthRecordViewModel(
         id: UUID(),
-        value: 22,
+        value: 30,
         createdDate: Date.fromString("2023/02/01 10:30"),
         type: .weight
     ),
     HealthRecordViewModel(
         id: UUID(),
-        value: 19,
+        value: 20,
         createdDate: Date.fromString("2023/03/01 10:30"),
         type: .weight
     ),
