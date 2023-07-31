@@ -21,14 +21,11 @@ enum HealthDetail {
         struct Response {
             let recordType: HealthRecordType
             let records: [HealthRecord]
-            
-            let updateWithAnimation: Bool
         }
 
         struct ViewModel {
             let unit: String
             let state: SceneViewModel.State
-            let updateWithAnimation: Bool
         }
     }
     

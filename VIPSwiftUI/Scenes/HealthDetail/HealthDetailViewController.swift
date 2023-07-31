@@ -54,11 +54,7 @@ final class HealthDetailViewController: BaseUIViewController, HealthDetailDispla
     func displayDetail(viewModel: HealthDetail.FetchDetail.ViewModel) {
         sceneViewModel.unit = viewModel.unit
         
-        if viewModel.updateWithAnimation {
-            withAnimation {
-                sceneViewModel.state = viewModel.state
-            }
-        } else {
+        withAnimation {
             sceneViewModel.state = viewModel.state
         }
     }
@@ -135,6 +131,9 @@ struct HealthDetailScreenSwiftUIView: View {
                             HStack {
                                 Text("\(item.stringValue)")
                                 Spacer()
+                                Image(systemName: "chevron.right")
+                                    .foregroundColor(.secondary)
+                                
                             }
                             .onPress { [weak viewController] in
                                 viewController?.handleTapRecord(item.id)

@@ -52,7 +52,7 @@ final class HealthDetailInteractor: HealthDetailBusinessLogic, HealthDetailDataS
     }
     
     func fetchDetail(request: HealthDetail.FetchDetail.Request) {
-        refreshDetail(updateWithAnimation: true)
+        refreshDetail()
     }
     
     func submitRecord(request: HealthDetail.SubmitRecord.Request) {
@@ -74,16 +74,16 @@ final class HealthDetailInteractor: HealthDetailBusinessLogic, HealthDetailDataS
             )
         }
         
-        refreshDetail(updateWithAnimation: true)
+        refreshDetail()
     }
     
     func removeDetail(request: HealthDetail.RemoveDetail.Request) {
         healthService.deleteHealthRecord(record: request.record)
         
-        refreshDetail(updateWithAnimation: false)
+        refreshDetail()
     }
     
-    func refreshDetail(updateWithAnimation: Bool) {
+    func refreshDetail() {
         let result = healthService.fetchHealthRecords(ofType: recordType)
         
         switch result {
@@ -92,8 +92,7 @@ final class HealthDetailInteractor: HealthDetailBusinessLogic, HealthDetailDataS
             
             presenter.presentDetail(response: .init(
                 recordType: recordType,
-                records: self.records,
-                updateWithAnimation: updateWithAnimation
+                records: self.records
             ))
         case .failure(_):
             // TODO: Handle error
