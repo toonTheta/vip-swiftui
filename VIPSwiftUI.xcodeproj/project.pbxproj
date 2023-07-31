@@ -25,6 +25,9 @@
 		875C9E482A51D834009D2552 /* HealthDetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875C9E402A51D834009D2552 /* HealthDetailInteractor.swift */; };
 		875C9E4B2A51DA62009D2552 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 875C9E4A2A51DA62009D2552 /* Main.storyboard */; };
 		875C9E4E2A51DCF8009D2552 /* CategoryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875C9E4D2A51DCF8009D2552 /* CategoryResponse.swift */; };
+		876FEFA72A78048300F29E05 /* HealthInputFormMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876FEFA62A78048300F29E05 /* HealthInputFormMainView.swift */; };
+		876FEFA92A78053700F29E05 /* HealthDetailMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876FEFA82A78053700F29E05 /* HealthDetailMainView.swift */; };
+		876FEFAB2A78056100F29E05 /* DashboardMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876FEFAA2A78056100F29E05 /* DashboardMainView.swift */; };
 		87704FFA2A570F9F00A85311 /* BaseUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87704FF92A570F9F00A85311 /* BaseUIViewController.swift */; };
 		87704FFD2A5724D000A85311 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 87704FFB2A5724D000A85311 /* Model.xcdatamodeld */; };
 		877050002A5725A200A85311 /* QueryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87704FFF2A5725A200A85311 /* QueryService.swift */; };
@@ -92,6 +95,9 @@
 		875C9E402A51D834009D2552 /* HealthDetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthDetailInteractor.swift; sourceTree = "<group>"; };
 		875C9E4A2A51DA62009D2552 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		875C9E4D2A51DCF8009D2552 /* CategoryResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryResponse.swift; sourceTree = "<group>"; };
+		876FEFA62A78048300F29E05 /* HealthInputFormMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthInputFormMainView.swift; sourceTree = "<group>"; };
+		876FEFA82A78053700F29E05 /* HealthDetailMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthDetailMainView.swift; sourceTree = "<group>"; };
+		876FEFAA2A78056100F29E05 /* DashboardMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardMainView.swift; sourceTree = "<group>"; };
 		87704FF92A570F9F00A85311 /* BaseUIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseUIViewController.swift; sourceTree = "<group>"; };
 		87704FFC2A5724D000A85311 /* HealthRecord.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = HealthRecord.xcdatamodel; sourceTree = "<group>"; };
 		87704FFF2A5725A200A85311 /* QueryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryService.swift; sourceTree = "<group>"; };
@@ -198,6 +204,7 @@
 				875C9E3D2A51D834009D2552 /* HealthDetailRouter.swift */,
 				875C9E3E2A51D834009D2552 /* HealthDetailModels.swift */,
 				875C9E3F2A51D834009D2552 /* HealthDetailViewController.swift */,
+				876FEFA82A78053700F29E05 /* HealthDetailMainView.swift */,
 				875C9E402A51D834009D2552 /* HealthDetailInteractor.swift */,
 				87E21EA92A570A8200124882 /* HealthDetailSceneViewModel.swift */,
 			);
@@ -307,6 +314,7 @@
 				877AA4E92A4E9FB600D63011 /* DashboardRouter.swift */,
 				877AA4EA2A4E9FB600D63011 /* DashboardModels.swift */,
 				877AA4EB2A4E9FB600D63011 /* DashboardViewController.swift */,
+				876FEFAA2A78056100F29E05 /* DashboardMainView.swift */,
 				877AA4EC2A4E9FB600D63011 /* DashboardInteractor.swift */,
 				877AA4F62A4EB97800D63011 /* DashboardSceneViewModel.swift */,
 				877AA4ED2A4E9FB600D63011 /* CounterViewController.xib */,
@@ -323,6 +331,7 @@
 				87E122892A5816700014D03F /* HealthInputFormRouter.swift */,
 				87E1228A2A5816700014D03F /* HealthInputFormModels.swift */,
 				87E1228B2A5816700014D03F /* HealthInputFormViewController.swift */,
+				876FEFA62A78048300F29E05 /* HealthInputFormMainView.swift */,
 				87E1228C2A5816700014D03F /* HealthInputFormInteractor.swift */,
 				87E122962A5817A40014D03F /* HealthInputFormSceneViewModel.swift */,
 			);
@@ -471,6 +480,7 @@
 				8718A0762A5EC4CB00AA8087 /* LineGraph.swift in Sources */,
 				87E122972A5817A40014D03F /* HealthInputFormSceneViewModel.swift in Sources */,
 				877AA4F72A4EB97800D63011 /* DashboardSceneViewModel.swift in Sources */,
+				876FEFA92A78053700F29E05 /* HealthDetailMainView.swift in Sources */,
 				877AA4F22A4E9FB600D63011 /* DashboardModels.swift in Sources */,
 				875C9E422A51D834009D2552 /* HealthDetailPresenterWorker.swift in Sources */,
 				875C9E442A51D834009D2552 /* HealthDetailWorker.swift in Sources */,
@@ -489,6 +499,7 @@
 				874078DE2A582AF30056A07F /* Callback.swift in Sources */,
 				877AA4EE2A4E9FB600D63011 /* DashboardPresenterWorker.swift in Sources */,
 				87E1228E2A5816700014D03F /* HealthInputFormPresenterWorker.swift in Sources */,
+				876FEFAB2A78056100F29E05 /* DashboardMainView.swift in Sources */,
 				877AA4B52A4E9F8100D63011 /* AppDelegate.swift in Sources */,
 				875C9E482A51D834009D2552 /* HealthDetailInteractor.swift in Sources */,
 				8718A0782A5ECA2F00AA8087 /* Display.swift in Sources */,
@@ -496,6 +507,7 @@
 				8744E8382A55841E001CC05E /* View+Extension.swift in Sources */,
 				875C9E452A51D834009D2552 /* HealthDetailRouter.swift in Sources */,
 				875C9E352A518A16009D2552 /* CategoryRow.swift in Sources */,
+				876FEFA72A78048300F29E05 /* HealthInputFormMainView.swift in Sources */,
 				877050022A5725D500A85311 /* HealthService.swift in Sources */,
 				877AA4B72A4E9F8100D63011 /* SceneDelegate.swift in Sources */,
 				87E122932A5816700014D03F /* HealthInputFormViewController.swift in Sources */,

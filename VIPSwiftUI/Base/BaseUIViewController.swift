@@ -9,7 +9,7 @@ import UIKit
 import SwiftUI
 
 class BaseUIViewController: UIViewController {
-    func loadSwiftUIView(_ swiftUIView: some View) {
+    func loadMainView(_ swiftUIView: some View) {
         let hostingController = UIHostingController(rootView: swiftUIView)
         
         addChild(hostingController)
