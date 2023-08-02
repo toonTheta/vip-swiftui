@@ -3,7 +3,7 @@
 //  CleanSwiftUI
 //
 //  Created by Siradanai.s on 30/6/2566 BE.
-//  Copyright (c) 2566 BE ___ORGANIZATIONNAME___. All rights reserved.
+//  Copyright (c) 2023. All rights reserved.
 //
 
 protocol DashboardWorkerProtocol {}
