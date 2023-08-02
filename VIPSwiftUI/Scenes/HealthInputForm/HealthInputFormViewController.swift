@@ -35,8 +35,8 @@ final class HealthInputFormViewController: BaseUIViewController, HealthInputForm
         deleteButtonTitleDisplay: .hidden
     )
     
-    private(set) var dateInputController = DateInputController()
-    private(set) var timeInputController = DateInputController()
+    private(set) var dateInputController = CustomDatePickerController()
+    private(set) var timeInputController = CustomDatePickerController()
     let textInputController = TextInputController()
     
     weak var delegate: HealthInputFormViewControllerDelegate?

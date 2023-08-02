@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8718A0712A5DC0EE00AA8087 /* DateInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8718A0702A5DC0EE00AA8087 /* DateInput.swift */; };
+		8718A0712A5DC0EE00AA8087 /* CustomDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8718A0702A5DC0EE00AA8087 /* CustomDatePicker.swift */; };
 		8718A0732A5EBCA700AA8087 /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8718A0722A5EBCA700AA8087 /* Array+Extension.swift */; };
 		8718A0762A5EC4CB00AA8087 /* LineGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8718A0752A5EC4CB00AA8087 /* LineGraph.swift */; };
 		8718A0782A5ECA2F00AA8087 /* Display.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8718A0772A5ECA2F00AA8087 /* Display.swift */; };
-		874078DC2A58239A0056A07F /* TextInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874078DB2A58239A0056A07F /* TextInput.swift */; };
+		874078DC2A58239A0056A07F /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874078DB2A58239A0056A07F /* CustomTextField.swift */; };
 		874078DE2A582AF30056A07F /* Callback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874078DD2A582AF30056A07F /* Callback.swift */; };
 		8744E8382A55841E001CC05E /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8744E8372A55841E001CC05E /* View+Extension.swift */; };
 		875C9E352A518A16009D2552 /* CategoryRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875C9E342A518A16009D2552 /* CategoryRow.swift */; };
@@ -77,11 +77,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		8718A0702A5DC0EE00AA8087 /* DateInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateInput.swift; sourceTree = "<group>"; };
+		8718A0702A5DC0EE00AA8087 /* CustomDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDatePicker.swift; sourceTree = "<group>"; };
 		8718A0722A5EBCA700AA8087 /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
 		8718A0752A5EC4CB00AA8087 /* LineGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineGraph.swift; sourceTree = "<group>"; };
 		8718A0772A5ECA2F00AA8087 /* Display.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Display.swift; sourceTree = "<group>"; };
-		874078DB2A58239A0056A07F /* TextInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextInput.swift; sourceTree = "<group>"; };
+		874078DB2A58239A0056A07F /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		874078DD2A582AF30056A07F /* Callback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Callback.swift; sourceTree = "<group>"; };
 		8744E8372A55841E001CC05E /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
 		875C9E342A518A16009D2552 /* CategoryRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryRow.swift; sourceTree = "<group>"; };
@@ -169,8 +169,8 @@
 		874078DA2A5823910056A07F /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
-				874078DB2A58239A0056A07F /* TextInput.swift */,
-				8718A0702A5DC0EE00AA8087 /* DateInput.swift */,
+				874078DB2A58239A0056A07F /* CustomTextField.swift */,
+				8718A0702A5DC0EE00AA8087 /* CustomDatePicker.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -484,9 +484,9 @@
 				877AA4F22A4E9FB600D63011 /* DashboardModels.swift in Sources */,
 				875C9E422A51D834009D2552 /* HealthDetailPresenterWorker.swift in Sources */,
 				875C9E442A51D834009D2552 /* HealthDetailWorker.swift in Sources */,
-				8718A0712A5DC0EE00AA8087 /* DateInput.swift in Sources */,
+				8718A0712A5DC0EE00AA8087 /* CustomDatePicker.swift in Sources */,
 				875C9E432A51D834009D2552 /* HealthDetailPresenter.swift in Sources */,
-				874078DC2A58239A0056A07F /* TextInput.swift in Sources */,
+				874078DC2A58239A0056A07F /* CustomTextField.swift in Sources */,
 				877050002A5725A200A85311 /* QueryService.swift in Sources */,
 				875C9E462A51D834009D2552 /* HealthDetailModels.swift in Sources */,
 				8718A0732A5EBCA700AA8087 /* Array+Extension.swift in Sources */,

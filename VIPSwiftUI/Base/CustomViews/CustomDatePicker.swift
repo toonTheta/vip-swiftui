@@ -1,5 +1,5 @@
 //
-//  DateInput.swift
+//  CustomDatePicker.swift
 //  VIPSwiftUI
 //
 //  Created by Siradanai.s on 11/7/2566 BE.
@@ -8,17 +8,17 @@
 import Combine
 import SwiftUI
 
-struct DateInput<Content: View>: View {
-    @ObservedObject private var controller: DateInputController
+struct CustomDatePicker<Content: View>: View {
+    @ObservedObject private var controller: CustomDatePickerController
     private let displayedComponents: DatePickerComponents
     private let content: Content
     
     init(
-        controller: DateInputController? = nil,
+        controller: CustomDatePickerController? = nil,
         displayedComponents: DatePickerComponents = .date,
         @ViewBuilder label: () -> Content
     ) {
-        self.controller = controller ?? DateInputController()
+        self.controller = controller ?? CustomDatePickerController()
         self.displayedComponents = displayedComponents
         self.content = label()
     }
@@ -37,7 +37,7 @@ struct DateInput<Content: View>: View {
     }
 }
 
-class DateInputController: ObservableObject {
+class CustomDatePickerController: ObservableObject {
     @Published private(set) var date: Date = Date()
     @Published fileprivate var userInputDate: Date = Date()
     
@@ -46,14 +46,14 @@ class DateInputController: ObservableObject {
     }
 }
 
-extension DateInput {
+extension CustomDatePicker {
     func onChange(_ action: @escaping (Date) -> Void) -> some View {
-        return self.modifier(DateInputChangeModifier(controller: controller, action: action))
+        return self.modifier(CustomDatePickerChangeModifier(controller: controller, action: action))
     }
 }
 
-struct DateInputChangeModifier: ViewModifier {
-    @ObservedObject var controller: DateInputController
+struct CustomDatePickerChangeModifier: ViewModifier {
+    @ObservedObject var controller: CustomDatePickerController
     let action: (Date) -> Void
     
     func body(content: Content) -> some View {

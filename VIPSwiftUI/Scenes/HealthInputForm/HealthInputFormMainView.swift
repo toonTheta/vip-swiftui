@@ -14,7 +14,7 @@ struct HealthInputFormMainView: View {
     
     var body: some View {
         Form {
-            DateInput(
+            CustomDatePicker(
                 controller: viewController?.dateInputController,
                 label: {
                     Text(viewModel.dateTitle)
@@ -26,7 +26,7 @@ struct HealthInputFormMainView: View {
             }
             
             
-            DateInput(
+            CustomDatePicker(
                 controller: viewController?.timeInputController,
                 displayedComponents: [.hourAndMinute]
             ) {
