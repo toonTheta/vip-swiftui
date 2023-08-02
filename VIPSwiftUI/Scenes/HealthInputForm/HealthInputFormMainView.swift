@@ -40,7 +40,7 @@ struct HealthInputFormMainView: View {
             HStack {
                 Text(viewModel.unitTitle)
                 Spacer()
-                TextInput(
+                CustomTextField(
                     placeholder: "value",
                     controller:viewController?.textInputController
                 )

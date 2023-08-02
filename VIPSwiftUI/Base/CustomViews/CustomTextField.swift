@@ -1,5 +1,5 @@
 //
-//  TextInput.swift
+//  CustomTextField.swift
 //  VIPSwiftUI
 //
 //  Created by Siradanai.s on 7/7/2566 BE.
@@ -8,16 +8,16 @@
 import Combine
 import SwiftUI
 
-struct TextInput: View {
-    @ObservedObject private var controller: TextInputController
+struct CustomTextField: View {
+    @ObservedObject private var controller: CustomTextFieldController
     private let placeholder: String?
     
     init(
         placeholder: String? = nil,
-        controller: TextInputController? = nil
+        controller: CustomTextFieldController? = nil
     ) {
         self.placeholder = placeholder
-        self.controller = controller ?? TextInputController()
+        self.controller = controller ?? CustomTextFieldController()
     }
     
     var body: some View {
@@ -32,7 +32,7 @@ struct TextInput: View {
     }
 }
 
-class TextInputController: ObservableObject {
+class CustomTextFieldController: ObservableObject {
     @Published private(set) var text: String = ""
     @Published fileprivate var userInputText: String = ""
     
@@ -41,14 +41,14 @@ class TextInputController: ObservableObject {
     }
 }
 
-extension TextInput {
+extension CustomTextField {
     func onTextChange(_ action: @escaping (String) -> Void) -> some View {
-        return self.modifier(TextInputChangeModifier(controller: controller, action: action))
+        return self.modifier(CustomTextFieldChangeModifier(controller: controller, action: action))
     }
 }
 
-struct TextInputChangeModifier: ViewModifier {
-    @ObservedObject var controller: TextInputController
+struct CustomTextFieldChangeModifier: ViewModifier {
+    @ObservedObject var controller: CustomTextFieldController
     let action: (String) -> Void
     
     func body(content: Content) -> some View {

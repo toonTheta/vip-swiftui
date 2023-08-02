@@ -37,7 +37,7 @@ final class HealthInputFormViewController: BaseUIViewController, HealthInputForm
     
     private(set) var dateInputController = CustomDatePickerController()
     private(set) var timeInputController = CustomDatePickerController()
-    let textInputController = TextInputController()
+    let textInputController = CustomTextFieldController()
     
     weak var delegate: HealthInputFormViewControllerDelegate?
     

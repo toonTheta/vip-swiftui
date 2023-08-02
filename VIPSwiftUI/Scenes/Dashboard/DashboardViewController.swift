@@ -25,7 +25,7 @@ class DashboardViewController: BaseUIViewController, DashboardDisplayLogic {
     var presenter: DashboardPresenter!
     var router: DashboardRoutingLogic!
     
-    let textController = TextInputController()
+    let textController = CustomTextFieldController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
