@@ -91,5 +91,5 @@ fileprivate let sceneViewModel = HealthInputFormSceneViewModel(
     timeTitle: "Time Ja",
     unitTitle: "KG",
     saveButtonDisabled: true,
-    deleteButtonTitle: .visible("Delete Ja")
+    deleteButtonTitleDisplay: .visible("Delete Ja")
 )

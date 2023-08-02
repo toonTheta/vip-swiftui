@@ -32,7 +32,7 @@ final class HealthInputFormViewController: BaseUIViewController, HealthInputForm
         timeTitle: "",
         unitTitle: "",
         saveButtonDisabled: true,
-        deleteButtonTitle: .hidden
+        deleteButtonTitleDisplay: .hidden
     )
     
     private(set) var dateInputController = DateInputController()
