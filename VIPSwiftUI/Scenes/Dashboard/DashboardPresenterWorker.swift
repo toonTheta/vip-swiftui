@@ -17,7 +17,13 @@ protocol CounterPresenterWorkerProtocol {
 final class DashboardPresenterWorker: CounterPresenterWorkerProtocol {
     func mapCategoryRow(from response: [CategoryResponse]) -> [CategoryRowViewModel] {
         return response
-            .map { (getTitle(for: $0.type), $0.value ?? "No Data" , .init(value: $0.lastUpdate?.toString()), $0.type) }
+            .map { (
+                getTitle(for: $0.type),
+                $0.value ?? "No Data" ,
+                getUnitDisplay(for: $0.type, value: $0.value),
+                    .init(value: $0.lastUpdate?.toString()),
+                $0.type
+            ) }
             .map(CategoryRowViewModel.init)
     }
 }
@@ -35,6 +41,21 @@ private extension DashboardPresenterWorker {
             return "Weight"
         case .height:
             return "Height"
+        }
+    }
+    
+    func getUnitDisplay(for type: HealthRecordType, value: String?) -> Display<String> {
+        guard value != nil else { return .hidden }
+        
+        switch type {
+        case .bodyMassIndex:
+            return .hidden
+        case .bodyFatPercentage:
+            return .visible("%")
+        case .weight:
+            return .visible("KG")
+        case .height:
+            return .visible("cm")
         }
     }
 }

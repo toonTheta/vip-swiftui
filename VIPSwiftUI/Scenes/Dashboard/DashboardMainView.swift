@@ -31,20 +31,23 @@ struct DashboardMainView: View {
 fileprivate let categoryViewModel: [CategoryRowViewModel] = [
     .init(
         title: "Weight",
-        value: "84 kg",
-        lastUpdated: .init(value: Date().toString()),
+        value: "84",
+        unitDisplay: .init(value: "KG"),
+        lastUpdatedDisplay: .init(value: Date().toString()),
         category: .weight
     ),
     .init(
         title: "Body Mass Index",
         value: "21",
-        lastUpdated: .init(value: Date().toString()),
+        unitDisplay: .hidden,
+        lastUpdatedDisplay: .init(value: Date().toString()),
         category: .bodyMassIndex
     ),
     .init(
         title: "Height",
         value: "No Data",
-        lastUpdated: .hidden,
+        unitDisplay: .init(value: "cm"),
+        lastUpdatedDisplay: .hidden,
         category: .height
     ),
 ]
