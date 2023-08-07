@@ -9,7 +9,7 @@ import Combine
 import SwiftUI
 
 struct CustomDatePicker<Content: View>: View {
-    @ObservedObject private var controller: CustomDatePickerController
+    private var controller: CustomDatePickerController
     private let displayedComponents: DatePickerComponents
     private let content: Content
     
@@ -53,7 +53,7 @@ extension CustomDatePicker {
 }
 
 struct CustomDatePickerChangeModifier: ViewModifier {
-    @ObservedObject var controller: CustomDatePickerController
+    var controller: CustomDatePickerController
     let action: (Date) -> Void
     
     func body(content: Content) -> some View {

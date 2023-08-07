@@ -9,7 +9,7 @@ import Combine
 import SwiftUI
 
 struct CustomTextField: View {
-    @ObservedObject private var controller: CustomTextFieldController
+    private var controller: CustomTextFieldController
     private let placeholder: String?
     
     init(
@@ -48,7 +48,7 @@ extension CustomTextField {
 }
 
 struct CustomTextFieldChangeModifier: ViewModifier {
-    @ObservedObject var controller: CustomTextFieldController
+    var controller: CustomTextFieldController
     let action: (String) -> Void
     
     func body(content: Content) -> some View {
