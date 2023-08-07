@@ -27,13 +27,7 @@ final class HealthInputFormViewController: BaseUIViewController, HealthInputForm
     var interactor: HealthInputFormBusinessLogic?
     var router: (HealthInputFormRoutingLogic & HealthInputFormDataPassing)?
     
-    private let sceneViewModel = HealthInputFormSceneViewModel(
-        dateTitle: "",
-        timeTitle: "",
-        unitTitle: "",
-        saveButtonDisabled: true,
-        deleteButtonTitleDisplay: .hidden
-    )
+    private let sceneViewModel = HealthInputFormSceneViewModel()
     
     private(set) var dateInputController = CustomDatePickerController()
     private(set) var timeInputController = CustomDatePickerController()
@@ -66,11 +60,7 @@ final class HealthInputFormViewController: BaseUIViewController, HealthInputForm
     }
     
     func displayPreparedData(viewModel: HealthInputForm.PrepareData.ViewModel) {
-        sceneViewModel.dateTitle = viewModel.dateTitle
-        sceneViewModel.timeTitle = viewModel.timeTitle
-        sceneViewModel.unitTitle = viewModel.unitTitle
-        sceneViewModel.saveButtonDisabled = viewModel.submitButtonDisabled
-        sceneViewModel.deleteButtonDisplay = viewModel.deleteButtonDisplay
+        sceneViewModel.updatePreparedData(viewModel: viewModel)
         
         dateInputController.updateDate(viewModel.dateValue)
         timeInputController.updateDate(viewModel.dateValue)

@@ -12,6 +12,11 @@ class HealthDetailSceneViewModel: ObservableObject {
     @Published var state: State
     @Published var unit: String
     
+    init() {
+        self.state = .empty
+        self.unit = ""
+    }
+    
     init(state: State, unit: String) {
         self.state = state
         self.unit = unit

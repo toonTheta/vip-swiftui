@@ -10,6 +10,10 @@ import Foundation
 class DashboardSceneViewModel: ObservableObject {
     @Published var categoryItems: [CategoryRowViewModel]
     
+    init() {
+        self.categoryItems = []
+    }
+    
     init(categoryItems: [CategoryRowViewModel]) {
         self.categoryItems = categoryItems
     }

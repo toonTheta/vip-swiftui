@@ -20,7 +20,7 @@ protocol DashboardDisplayLogic: AnyObject {
 
 class DashboardViewController: BaseUIViewController, DashboardDisplayLogic {
     
-    private let viewModel = DashboardSceneViewModel(categoryItems: [])
+    private let viewModel = DashboardSceneViewModel()
     var interactor: DashboardInteractor!
     var presenter: DashboardPresenter!
     var router: DashboardRoutingLogic!

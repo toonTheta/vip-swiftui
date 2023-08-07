@@ -21,10 +21,7 @@ final class HealthDetailViewController: BaseUIViewController, HealthDetailDispla
     var interactor: HealthDetailBusinessLogic?
     var router: (HealthDetailRoutingLogic & HealthDetailDataPassing)?
     
-    private let sceneViewModel = HealthDetailSceneViewModel(
-        state: .empty,
-        unit: ""
-    )
+    private let sceneViewModel = HealthDetailSceneViewModel()
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

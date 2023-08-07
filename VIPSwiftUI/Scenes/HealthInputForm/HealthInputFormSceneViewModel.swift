@@ -15,6 +15,14 @@ class HealthInputFormSceneViewModel: ObservableObject {
     @Published var saveButtonDisabled: Bool
     @Published var deleteButtonDisplay: Display<String>
     
+    init() {
+        self.dateTitle = ""
+        self.timeTitle = ""
+        self.unitTitle = ""
+        self.saveButtonDisabled = true
+        self.deleteButtonDisplay = .hidden
+    }
+    
     init(
         dateTitle: String,
         timeTitle: String,
@@ -27,5 +35,13 @@ class HealthInputFormSceneViewModel: ObservableObject {
         self.unitTitle = unitTitle
         self.saveButtonDisabled = saveButtonDisabled
         self.deleteButtonDisplay = deleteButtonTitleDisplay
+    }
+    
+    func updatePreparedData(viewModel: HealthInputForm.PrepareData.ViewModel) {
+        self.dateTitle = viewModel.dateTitle
+        self.timeTitle = viewModel.timeTitle
+        self.unitTitle = viewModel.unitTitle
+        self.saveButtonDisabled = viewModel.submitButtonDisabled
+        self.deleteButtonDisplay = viewModel.deleteButtonDisplay
     }
 }
