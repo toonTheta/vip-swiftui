@@ -7,34 +7,42 @@
 
 import SwiftUI
 
+protocol HealthInputFormMainViewProtocol: AnyObject {
+    var dateInputController: CustomDatePickerController { get }
+    var timeInputController: CustomDatePickerController { get }
+    var textInputController: CustomTextFieldController { get }
+    
+    func dateInputDidChange(date: Date)
+    func timeInputDidChange(date: Date)
+    func valueInputDidChange(valueString: String)
+    func saveButtonDidTap()
+    func deleteButtonDidTap()
+}
+
 struct HealthInputFormMainView: View {
-    weak var viewController: HealthInputFormViewController?
+    var viewProtocol: HealthInputFormMainViewProtocol?
     @ObservedObject var viewModel: HealthInputFormSceneViewModel
     @State private var birthDate = Date()
     
     var body: some View {
         Form {
             CustomDatePicker(
-                controller: viewController?.dateInputController,
+                controller: viewProtocol?.dateInputController,
                 label: {
                     Text(viewModel.dateTitle)
                 }
-            ).onChange { [weak viewController] date in
-                viewController?
-                    .interactor?
-                    .proceedDateInput(request: .init(date: date))
+            ).onChange { [weak viewProtocol] date in
+                viewProtocol?.dateInputDidChange(date: date)
             }
             
             
             CustomDatePicker(
-                controller: viewController?.timeInputController,
+                controller: viewProtocol?.timeInputController,
                 displayedComponents: [.hourAndMinute]
             ) {
                 Text(viewModel.timeTitle)
-            }.onChange { [weak viewController] date in
-                viewController?
-                    .interactor?
-                    .proceedDateInput(request: .init(date: date))
+            }.onChange { [weak viewProtocol] date in
+                viewProtocol?.timeInputDidChange(date: date)
             }
             
             HStack {
@@ -42,14 +50,10 @@ struct HealthInputFormMainView: View {
                 Spacer()
                 CustomTextField(
                     placeholder: "value",
-                    controller:viewController?.textInputController
+                    controller: viewProtocol?.textInputController
                 )
-                .onTextChange { [weak viewController] text in
-                    viewController?
-                        .interactor?
-                        .proceedTextInput(
-                            request: .init(text: text)
-                        )
+                .onTextChange { [weak viewProtocol] text in
+                    viewProtocol?.valueInputDidChange(valueString: text)
                 }
                 .multilineTextAlignment(.trailing)
                 .frame(maxWidth: 80)
@@ -57,8 +61,8 @@ struct HealthInputFormMainView: View {
             }
             
             Section {
-                Button("Save") { [weak viewController] in
-                    viewController?.handleTapAddData()
+                Button("Save") { [weak viewProtocol] in
+                    viewProtocol?.saveButtonDidTap()
                 }
                 .disabled(viewModel.saveButtonDisabled)
                 .frame(maxWidth: .infinity) // center the button
@@ -66,8 +70,8 @@ struct HealthInputFormMainView: View {
             
             viewModel.deleteButtonDisplay.when(visible: { title in
                 Section {
-                    Button(title) { [weak viewController] in
-                        viewController?.handleTapDeleteData()
+                    Button(title) { [weak viewProtocol] in
+                        viewProtocol?.deleteButtonDidTap()
                     }
                     .frame(maxWidth: .infinity) // center the button
                 }.foregroundColor(.red)

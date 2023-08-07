@@ -45,7 +45,7 @@ final class HealthDetailViewController: BaseUIViewController, HealthDetailDispla
         
         loadMainView(
             HealthDetailMainView(
-                viewController: self,
+                viewProtocol: self,
                 viewModel: sceneViewModel
             )
         )
@@ -58,9 +58,11 @@ final class HealthDetailViewController: BaseUIViewController, HealthDetailDispla
             sceneViewModel.state = viewModel.state
         }
     }
-    
-    func handleTapRecord(_ id: UUID) {
-        router?.routeToEditData(recordId: id)
+}
+
+extension HealthDetailViewController: HealthDetailMainViewProtocol {
+    func recordDidTap(recordId: UUID) {
+        router?.routeToEditData(recordId: recordId)
     }
 }
 

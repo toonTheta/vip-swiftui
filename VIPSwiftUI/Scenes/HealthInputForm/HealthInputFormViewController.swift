@@ -23,7 +23,7 @@ protocol HealthInputFormDisplayLogic: AnyObject {
     func displayPreparedData(viewModel: HealthInputForm.PrepareData.ViewModel)
 }
 
-final class HealthInputFormViewController: BaseUIViewController, HealthInputFormDisplayLogic {
+final class HealthInputFormViewController: BaseUIViewController, HealthInputFormDisplayLogic, HealthInputFormMainViewProtocol {
     var interactor: HealthInputFormBusinessLogic?
     var router: (HealthInputFormRoutingLogic & HealthInputFormDataPassing)?
     
@@ -37,7 +37,7 @@ final class HealthInputFormViewController: BaseUIViewController, HealthInputForm
     
     private(set) var dateInputController = CustomDatePickerController()
     private(set) var timeInputController = CustomDatePickerController()
-    let textInputController = CustomTextFieldController()
+    private(set) var textInputController = CustomTextFieldController()
     
     weak var delegate: HealthInputFormViewControllerDelegate?
     
@@ -58,7 +58,7 @@ final class HealthInputFormViewController: BaseUIViewController, HealthInputForm
         super.viewDidLoad()
         
         loadMainView(HealthInputFormMainView(
-            viewController: self,
+            viewProtocol: self,
             viewModel: sceneViewModel
         ))
         
@@ -83,6 +83,46 @@ final class HealthInputFormViewController: BaseUIViewController, HealthInputForm
     }
 }
 
+extension HealthInputFormViewController {
+    func dateInputDidChange(date: Date) {
+        interactor?.proceedDateInput(request: .init(date: date))
+    }
+    
+    func timeInputDidChange(date: Date) {
+        interactor?.proceedDateInput(request: .init(date: date))
+    }
+    
+    func valueInputDidChange(valueString: String) {
+        interactor?.proceedTextInput(request: .init(text: valueString))
+    }
+    
+    func saveButtonDidTap() {
+        guard
+            let date = interactor?.inputDate,
+            let text = interactor?.inputText,
+            let doubleValue = Double(text),
+            let sceneOption = interactor?.sceneOption
+        else { return }
+        
+        delegate?.didSubmitHealthInputData(
+            withValue: doubleValue,
+            date: date,
+            mode: sceneOption
+        )
+        
+        dismiss(animated: true)
+    }
+    
+    func deleteButtonDidTap() {
+        guard
+            let record = interactor?.record
+        else { return }
+        
+        delegate?.didPressDelete(record: record)
+        dismiss(animated: true)
+    }
+}
+
 private extension HealthInputFormViewController {
     func setupVIP(sceneOption: HealthInputForm.SceneOption) {
         let viewController = self
@@ -101,33 +141,5 @@ private extension HealthInputFormViewController {
         viewController.router = router
         router.viewController = viewController
         router.dataStore = interactor
-    }
-}
-
-extension HealthInputFormViewController {
-    func handleTapAddData() {
-        guard
-            let date = interactor?.inputDate,
-            let text = interactor?.inputText,
-            let doubleValue = Double(text),
-            let sceneOption = interactor?.sceneOption
-        else { return }
-        
-        delegate?.didSubmitHealthInputData(
-            withValue: doubleValue,
-            date: date,
-            mode: sceneOption
-        )
-        
-        dismiss(animated: true)
-    }
-    
-    func handleTapDeleteData() {
-        guard
-            let record = interactor?.record
-        else { return }
-        
-        delegate?.didPressDelete(record: record)
-        dismiss(animated: true)
     }
 }

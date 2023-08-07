@@ -35,7 +35,7 @@ class DashboardViewController: BaseUIViewController, DashboardDisplayLogic {
         
         loadMainView(
             DashboardMainView(
-                viewController: self,
+                viewProtocol: self,
                 viewModel: viewModel
             )
         )
@@ -53,6 +53,14 @@ class DashboardViewController: BaseUIViewController, DashboardDisplayLogic {
         super.viewDidAppear(animated)
         
         interactor.fetchCateogory(request: .init())
+    }
+}
+
+extension DashboardViewController: DashboardMainViewProtocol {
+    func categoryDidTap(type: HealthRecordType) {
+        interactor?.tapCategory(
+            request: .init(categoryType: type)
+        )
     }
 }
 
