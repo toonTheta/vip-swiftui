@@ -23,16 +23,11 @@ protocol HealthInputFormDisplayLogic: AnyObject {
     func displayPreparedData(viewModel: HealthInputForm.PrepareData.ViewModel)
 }
 
-final class HealthInputFormViewController: BaseUIViewController, HealthInputFormDisplayLogic, HealthInputFormMainViewProtocol {
+final class HealthInputFormViewController: BaseUIViewController, HealthInputFormDisplayLogic, HealthInputFormMainViewDelegate {
     var interactor: HealthInputFormBusinessLogic?
     var router: (HealthInputFormRoutingLogic & HealthInputFormDataPassing)?
     
     private let sceneViewModel = HealthInputFormSceneViewModel()
-    
-    private(set) var dateInputController = CustomDatePickerController()
-    private(set) var timeInputController = CustomDatePickerController()
-    private(set) var textInputController = CustomTextFieldController()
-    
     weak var delegate: HealthInputFormViewControllerDelegate?
     
     init(
@@ -52,7 +47,7 @@ final class HealthInputFormViewController: BaseUIViewController, HealthInputForm
         super.viewDidLoad()
         
         loadMainView(HealthInputFormMainView(
-            viewProtocol: self,
+            delegate: self,
             viewModel: sceneViewModel
         ))
         
@@ -61,11 +56,6 @@ final class HealthInputFormViewController: BaseUIViewController, HealthInputForm
     
     func displayPreparedData(viewModel: HealthInputForm.PrepareData.ViewModel) {
         sceneViewModel.updatePreparedData(viewModel: viewModel)
-        
-        dateInputController.updateDate(viewModel.dateValue)
-        timeInputController.updateDate(viewModel.dateValue)
-        textInputController.updateText(viewModel.textValue)
-        
     }
     
     func displayProceedTextInput(viewModel: HealthInputForm.ProceedTextInput.ViewModel) {

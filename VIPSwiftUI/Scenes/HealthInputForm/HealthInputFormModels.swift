@@ -37,7 +37,7 @@ enum HealthInputForm {
             let unitTitle: String
             
             let dateValue: Date
-            let textValue: String
+            let textInputValue: String
             
             let submitButtonDisabled: Bool
             let deleteButtonDisplay: Display<String>

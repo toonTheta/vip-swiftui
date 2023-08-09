@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-protocol HealthDetailMainViewProtocol: AnyObject {
+protocol HealthDetailMainDelegate: AnyObject {
     func recordDidTap(recordId: UUID)
 }
 
 struct HealthDetailMainView: View {
-    var viewProtocol: HealthDetailMainViewProtocol?
+    var delegate: HealthDetailMainDelegate?
     @ObservedObject var viewModel: HealthDetailSceneViewModel
     
     var body: some View {
@@ -36,8 +36,8 @@ struct HealthDetailMainView: View {
                                     .foregroundColor(.secondary)
                                 
                             }
-                            .onPress { [weak viewProtocol] in
-                                viewProtocol?.recordDidTap(recordId: item.id)
+                            .onPress { [weak delegate] in
+                                delegate?.recordDidTap(recordId: item.id)
                             }
                         }
                     }
@@ -50,7 +50,7 @@ struct HealthDetailMainView: View {
 struct HealthDetailMainView_Previews: PreviewProvider {
     static var previews: some View {
         HealthDetailMainView(
-            viewProtocol: nil,
+            delegate: nil,
             viewModel: .init(state: .showRecords(_records), unit: "KG")
         )
     }

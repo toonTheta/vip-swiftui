@@ -7,11 +7,7 @@
 
 import SwiftUI
 
-protocol HealthInputFormMainViewProtocol: AnyObject {
-    var dateInputController: CustomDatePickerController { get }
-    var timeInputController: CustomDatePickerController { get }
-    var textInputController: CustomTextFieldController { get }
-    
+protocol HealthInputFormMainViewDelegate: AnyObject {
     func dateInputDidChange(date: Date)
     func timeInputDidChange(date: Date)
     func valueInputDidChange(valueString: String)
@@ -20,49 +16,45 @@ protocol HealthInputFormMainViewProtocol: AnyObject {
 }
 
 struct HealthInputFormMainView: View {
-    var viewProtocol: HealthInputFormMainViewProtocol?
+    var delegate: HealthInputFormMainViewDelegate?
     @ObservedObject var viewModel: HealthInputFormSceneViewModel
     @State private var birthDate = Date()
     
     var body: some View {
         Form {
-            CustomDatePicker(
-                controller: viewProtocol?.dateInputController,
-                label: {
-                    Text(viewModel.dateTitle)
-                }
-            ).onChange { [weak viewProtocol] date in
-                viewProtocol?.dateInputDidChange(date: date)
+            DatePicker(
+                selection: $viewModel.dateTimeValue,
+                displayedComponents: [.date],
+                label: { Text(viewModel.dateTitle) }
+            ).onChange(of: viewModel.dateTimeValue) { [weak delegate] dateTimeValue in
+                delegate?.dateInputDidChange(date: dateTimeValue)
             }
             
-            
-            CustomDatePicker(
-                controller: viewProtocol?.timeInputController,
-                displayedComponents: [.hourAndMinute]
-            ) {
-                Text(viewModel.timeTitle)
-            }.onChange { [weak viewProtocol] date in
-                viewProtocol?.timeInputDidChange(date: date)
+            DatePicker(
+                selection: $viewModel.dateTimeValue,
+                displayedComponents: [.hourAndMinute],
+                label: { Text(viewModel.dateTitle) }
+            ).onChange(of: viewModel.dateTimeValue) { [weak delegate] dateTimeValue in
+                delegate?.dateInputDidChange(date: dateTimeValue)
             }
             
             HStack {
                 Text(viewModel.unitTitle)
                 Spacer()
-                CustomTextField(
-                    placeholder: "value",
-                    controller: viewProtocol?.textInputController
-                )
-                .onTextChange { [weak viewProtocol] text in
-                    viewProtocol?.valueInputDidChange(valueString: text)
-                }
+                TextField("value", text: $viewModel.textInputValue)
+                    .onChange(of: viewModel.textInputValue) { [weak delegate] textValue in
+                        delegate?.valueInputDidChange(
+                            valueString: textValue
+                        )
+                    }
                 .multilineTextAlignment(.trailing)
                 .frame(maxWidth: 80)
                 .keyboardType(.decimalPad)
             }
             
             Section {
-                Button("Save") { [weak viewProtocol] in
-                    viewProtocol?.saveButtonDidTap()
+                Button("Save") { [weak delegate] in
+                    delegate?.saveButtonDidTap()
                 }
                 .disabled(viewModel.saveButtonDisabled)
                 .frame(maxWidth: .infinity) // center the button
@@ -70,8 +62,8 @@ struct HealthInputFormMainView: View {
             
             viewModel.deleteButtonDisplay.when(visible: { title in
                 Section {
-                    Button(title) { [weak viewProtocol] in
-                        viewProtocol?.deleteButtonDidTap()
+                    Button(title) { [weak delegate] in
+                        delegate?.deleteButtonDidTap()
                     }
                     .frame(maxWidth: .infinity) // center the button
                 }.foregroundColor(.red)
@@ -94,6 +86,8 @@ fileprivate let sceneViewModel = HealthInputFormSceneViewModel(
     dateTitle: "Date Ja",
     timeTitle: "Time Ja",
     unitTitle: "KG",
+    dateTimeValue: Date(),
+    textValue: "23",
     saveButtonDisabled: true,
     deleteButtonTitleDisplay: .visible("Delete Ja")
 )

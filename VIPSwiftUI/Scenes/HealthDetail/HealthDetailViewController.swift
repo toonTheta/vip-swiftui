@@ -21,7 +21,7 @@ final class HealthDetailViewController: BaseUIViewController, HealthDetailDispla
     var interactor: HealthDetailBusinessLogic?
     var router: (HealthDetailRoutingLogic & HealthDetailDataPassing)?
     
-    private let sceneViewModel = HealthDetailSceneViewModel()
+    private var sceneViewModel = HealthDetailSceneViewModel()
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -42,7 +42,7 @@ final class HealthDetailViewController: BaseUIViewController, HealthDetailDispla
         
         loadMainView(
             HealthDetailMainView(
-                viewProtocol: self,
+                delegate: self,
                 viewModel: sceneViewModel
             )
         )
@@ -57,7 +57,7 @@ final class HealthDetailViewController: BaseUIViewController, HealthDetailDispla
     }
 }
 
-extension HealthDetailViewController: HealthDetailMainViewProtocol {
+extension HealthDetailViewController: HealthDetailMainDelegate {
     func recordDidTap(recordId: UUID) {
         router?.routeToEditData(recordId: recordId)
     }

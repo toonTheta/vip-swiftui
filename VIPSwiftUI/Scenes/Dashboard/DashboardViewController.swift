@@ -25,8 +25,6 @@ class DashboardViewController: BaseUIViewController, DashboardDisplayLogic {
     var presenter: DashboardPresenter!
     var router: DashboardRoutingLogic!
     
-    let textController = CustomTextFieldController()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "Dashboard"
@@ -35,7 +33,7 @@ class DashboardViewController: BaseUIViewController, DashboardDisplayLogic {
         
         loadMainView(
             DashboardMainView(
-                viewProtocol: self,
+                delegate: self,
                 viewModel: viewModel
             )
         )
@@ -56,7 +54,7 @@ class DashboardViewController: BaseUIViewController, DashboardDisplayLogic {
     }
 }
 
-extension DashboardViewController: DashboardMainViewProtocol {
+extension DashboardViewController: DashboardMainDelegate {
     func categoryDidTap(type: HealthRecordType) {
         interactor?.tapCategory(
             request: .init(categoryType: type)

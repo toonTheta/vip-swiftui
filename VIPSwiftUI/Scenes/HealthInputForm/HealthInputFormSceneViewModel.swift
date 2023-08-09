@@ -12,6 +12,8 @@ class HealthInputFormSceneViewModel: ObservableObject {
     @Published var timeTitle: String
     @Published var unitTitle: String
     
+    @Published var dateTimeValue: Date
+    @Published var textInputValue: String
     @Published var saveButtonDisabled: Bool
     @Published var deleteButtonDisplay: Display<String>
     
@@ -19,6 +21,9 @@ class HealthInputFormSceneViewModel: ObservableObject {
         self.dateTitle = ""
         self.timeTitle = ""
         self.unitTitle = ""
+        
+        self.dateTimeValue = Date()
+        self.textInputValue = ""
         self.saveButtonDisabled = true
         self.deleteButtonDisplay = .hidden
     }
@@ -27,12 +32,17 @@ class HealthInputFormSceneViewModel: ObservableObject {
         dateTitle: String,
         timeTitle: String,
         unitTitle: String,
+        dateTimeValue: Date,
+        textValue: String,
         saveButtonDisabled: Bool,
         deleteButtonTitleDisplay: Display<String>
     ) {
         self.dateTitle = dateTitle
         self.timeTitle = timeTitle
         self.unitTitle = unitTitle
+        
+        self.dateTimeValue = dateTimeValue
+        self.textInputValue = textValue
         self.saveButtonDisabled = saveButtonDisabled
         self.deleteButtonDisplay = deleteButtonTitleDisplay
     }
@@ -41,6 +51,9 @@ class HealthInputFormSceneViewModel: ObservableObject {
         self.dateTitle = viewModel.dateTitle
         self.timeTitle = viewModel.timeTitle
         self.unitTitle = viewModel.unitTitle
+        
+        self.dateTimeValue = viewModel.dateValue
+        self.textInputValue = viewModel.textInputValue
         self.saveButtonDisabled = viewModel.submitButtonDisabled
         self.deleteButtonDisplay = viewModel.deleteButtonDisplay
     }

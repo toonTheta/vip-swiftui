@@ -37,7 +37,7 @@ final class HealthInputFormPresenter: HealthInputFormPresentationLogic {
             timeTitle: "Time",
             unitTitle: worker.mapUnitLabel(recordType: response.recordType),
             dateValue: response.date,
-            textValue: response.value.flatMap { "\($0)" } ?? "",
+            textInputValue: response.value.flatMap { "\($0)" } ?? "",
             submitButtonDisabled: !response.submitButtonEnabled,
             deleteButtonDisplay: response.deleteButtonEnabled ? .visible("Delete") : .hidden
         ))

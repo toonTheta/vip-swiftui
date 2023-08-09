@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-protocol DashboardMainViewProtocol: AnyObject {
+protocol DashboardMainDelegate: AnyObject {
     func categoryDidTap(type: HealthRecordType)
 }
 
 struct DashboardMainView: View {
-    var viewProtocol: DashboardMainViewProtocol?
+    var delegate: DashboardMainDelegate?
     @ObservedObject var viewModel: DashboardSceneViewModel
     
     var body: some View {
@@ -20,8 +20,8 @@ struct DashboardMainView: View {
             ForEach(viewModel.categoryItems, id: \.category) { model in
                 CategoryRow(
                     viewModel: model
-                ).onPress { [weak viewProtocol] in
-                    viewProtocol?.categoryDidTap(type: model.category)
+                ).onPress { [weak delegate] in
+                    delegate?.categoryDidTap(type: model.category)
                 }
             }
         }
@@ -57,7 +57,7 @@ fileprivate let categoryViewModel: [CategoryRowViewModel] = [
 struct DashboardScreenSwiftUIView_Previews: PreviewProvider {
     static var previews: some View {
         DashboardMainView(
-            viewProtocol: nil,
+            delegate: nil,
             viewModel: .init(categoryItems: categoryViewModel)
         )
     }
