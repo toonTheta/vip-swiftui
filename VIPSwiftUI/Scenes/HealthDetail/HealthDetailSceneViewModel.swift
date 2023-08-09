@@ -41,9 +41,9 @@ class HealthDetailSceneViewModel: ObservableObject {
         ) -> some View {
             switch self {
             case .empty:
-                AnyView(empty())
+                empty()
             case let .showRecords(model):
-                AnyView(showRecords(model))
+                showRecords(model)
             }
         }
     }

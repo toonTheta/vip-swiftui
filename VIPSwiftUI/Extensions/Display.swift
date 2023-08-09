@@ -24,9 +24,9 @@ enum Display<T> {
     func when(@ViewBuilder visible: (T) -> some View) -> some View {
         switch self {
         case .hidden:
-            AnyView(EmptyView())
+            EmptyView()
         case let .visible(model):
-            AnyView(visible(model))
+            visible(model)
         }
     }
 }
