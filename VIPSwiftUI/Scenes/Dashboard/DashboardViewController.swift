@@ -19,10 +19,8 @@ protocol DashboardDisplayLogic: AnyObject {
 }
 
 class DashboardViewController: BaseUIViewController, DashboardDisplayLogic {
-    
     private let viewModel = DashboardSceneViewModel()
     var interactor: DashboardInteractor!
-    var presenter: DashboardPresenter!
     var router: DashboardRoutingLogic!
     
     override func viewDidLoad() {
@@ -64,15 +62,20 @@ extension DashboardViewController: DashboardMainDelegate {
 
 private extension DashboardViewController {
     func setupVIP() {
-        router = DashboardRouter(viewController: self)
+        let viewController = self
         
-        presenter = DashboardPresenter(
+        let presenter = DashboardPresenter(
             viewController: self
         )
         
-        interactor = DashboardInteractor(
+        let interactor = DashboardInteractor(
             presenter: presenter,
             healthService: QueryService.shared
         )
+        
+        let router = DashboardRouter(viewController: self)
+        viewController.interactor = interactor
+        viewController.router = router
+        router.viewController = viewController
     }
 }
