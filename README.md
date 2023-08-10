@@ -26,8 +26,8 @@ git clone https://github.com/toonTheta/vip-swiftui.git
 
 The project follows the Clean Swift (VIP) architectural pattern for the UIKit-based components (e.g., Interactors, Presenters, and View Controllers). However, the View Controllers are designed to present SwiftUI Views instead of traditional UIKit views.
 
-<img src="assets/VIP_diagram_dark.png#gh-dark-mode-only" width="50%" alt="VIP_SwiftUI_Diagram" />
-<img src="assets/VIP_diagram_light.png#gh-light-mode-only" width="50%" alt="VIP_SwiftUI_Diagram" />
+<img src="assets/VIP_diagram_dark.png#gh-dark-mode-only" width="100%" alt="VIP_SwiftUI_Diagram" />
+<img src="assets/VIP_diagram_light.png#gh-light-mode-only" width="100%" alt="VIP_SwiftUI_Diagram" />
 
 ### Clean Swift (VIP)
 
