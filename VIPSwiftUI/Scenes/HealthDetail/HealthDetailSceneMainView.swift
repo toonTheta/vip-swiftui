@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-protocol HealthDetailMainDelegate: AnyObject {
+protocol HealthDetailSceneMainViewDelegate: AnyObject {
     func recordDidTap(recordId: UUID)
 }
 
-struct HealthDetailMainView: View {
-    var delegate: HealthDetailMainDelegate?
+struct HealthDetailSceneMainView: View {
+    var delegate: HealthDetailSceneMainViewDelegate?
     @ObservedObject var viewModel: HealthDetailSceneViewModel
     
     var body: some View {
@@ -49,7 +49,7 @@ struct HealthDetailMainView: View {
 
 struct HealthDetailMainView_Previews: PreviewProvider {
     static var previews: some View {
-        HealthDetailMainView(
+        HealthDetailSceneMainView(
             delegate: nil,
             viewModel: .init(state: .showRecords(_records), unit: "KG")
         )

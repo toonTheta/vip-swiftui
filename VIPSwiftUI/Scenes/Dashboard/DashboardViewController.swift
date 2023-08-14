@@ -30,7 +30,7 @@ class DashboardViewController: BaseUIViewController, DashboardDisplayLogic {
         setupVIP()
         
         loadMainView(
-            DashboardMainView(
+            DashboardSceneMainView(
                 delegate: self,
                 viewModel: viewModel
             )
@@ -52,7 +52,7 @@ class DashboardViewController: BaseUIViewController, DashboardDisplayLogic {
     }
 }
 
-extension DashboardViewController: DashboardMainDelegate {
+extension DashboardViewController: DashboardSceneMainViewDelegate {
     func categoryDidTap(type: HealthRecordType) {
         interactor?.tapCategory(
             request: .init(categoryType: type)

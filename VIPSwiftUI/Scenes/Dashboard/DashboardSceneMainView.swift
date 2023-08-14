@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-protocol DashboardMainDelegate: AnyObject {
+protocol DashboardSceneMainViewDelegate: AnyObject {
     func categoryDidTap(type: HealthRecordType)
 }
 
-struct DashboardMainView: View {
-    var delegate: DashboardMainDelegate?
+struct DashboardSceneMainView: View {
+    var delegate: DashboardSceneMainViewDelegate?
     @ObservedObject var viewModel: DashboardSceneViewModel
     
     var body: some View {
@@ -56,7 +56,7 @@ fileprivate let categoryViewModel: [CategoryRowViewModel] = [
 
 struct DashboardScreenSwiftUIView_Previews: PreviewProvider {
     static var previews: some View {
-        DashboardMainView(
+        DashboardSceneMainView(
             delegate: nil,
             viewModel: .init(categoryItems: categoryViewModel)
         )

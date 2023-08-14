@@ -41,7 +41,7 @@ final class HealthDetailViewController: BaseUIViewController, HealthDetailDispla
         navigationItem.title = "Detail"
         
         loadMainView(
-            HealthDetailMainView(
+            HealthDetailSceneMainView(
                 delegate: self,
                 viewModel: sceneViewModel
             )
@@ -57,7 +57,7 @@ final class HealthDetailViewController: BaseUIViewController, HealthDetailDispla
     }
 }
 
-extension HealthDetailViewController: HealthDetailMainDelegate {
+extension HealthDetailViewController: HealthDetailSceneMainViewDelegate {
     func recordDidTap(recordId: UUID) {
         router?.routeToEditData(recordId: recordId)
     }

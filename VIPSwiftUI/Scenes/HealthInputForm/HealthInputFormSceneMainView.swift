@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-protocol HealthInputFormMainViewDelegate: AnyObject {
+protocol HealthInputFormSceneMainViewDelegate: AnyObject {
     func dateInputDidChange(date: Date)
     func timeInputDidChange(date: Date)
     func valueInputDidChange(valueString: String)
@@ -15,10 +15,9 @@ protocol HealthInputFormMainViewDelegate: AnyObject {
     func deleteButtonDidTap()
 }
 
-struct HealthInputFormMainView: View {
-    var delegate: HealthInputFormMainViewDelegate?
+struct HealthInputFormSceneMainView: View {
+    var delegate: HealthInputFormSceneMainViewDelegate?
     @ObservedObject var viewModel: HealthInputFormSceneViewModel
-    @State private var birthDate = Date()
     
     var body: some View {
         Form {
@@ -76,7 +75,7 @@ struct HealthInputFormMainView: View {
 
 struct HealthInputFormView_Previews: PreviewProvider {
     static var previews: some View {
-        HealthInputFormMainView(viewModel: sceneViewModel)
+        HealthInputFormSceneMainView(viewModel: sceneViewModel)
     }
 }
 

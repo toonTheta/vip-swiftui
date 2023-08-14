@@ -23,7 +23,7 @@ protocol HealthInputFormDisplayLogic: AnyObject {
     func displayPreparedData(viewModel: HealthInputForm.PrepareData.ViewModel)
 }
 
-final class HealthInputFormViewController: BaseUIViewController, HealthInputFormDisplayLogic, HealthInputFormMainViewDelegate {
+final class HealthInputFormViewController: BaseUIViewController, HealthInputFormDisplayLogic, HealthInputFormSceneMainViewDelegate {
     var interactor: HealthInputFormBusinessLogic?
     var router: (HealthInputFormRoutingLogic & HealthInputFormDataPassing)?
     
@@ -46,7 +46,7 @@ final class HealthInputFormViewController: BaseUIViewController, HealthInputForm
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        loadMainView(HealthInputFormMainView(
+        loadMainView(HealthInputFormSceneMainView(
             delegate: self,
             viewModel: sceneViewModel
         ))
