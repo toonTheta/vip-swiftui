@@ -35,33 +35,39 @@ Clean Swift architecture consists of the following components:
 
 1. **ViewController:** Represents the UIKit-based user interface component. In this project, it will solely be responsible for displaying SwiftUI views.
 
-2. **Interactor:** Acts as the middleman between the ViewController and the Business Logic (Domain). It contains the business logic and handles data processing and manipulation.
+2. **Interactor:** Acts as the middleman between the ViewController and the Business Logic. It contains the business logic and handles data processing and manipulation.
 
-3. **Presenter:** Formats the data from the Interactor into a presentable format for the ViewController. It separates the data formatting from the business logic.
+3. **Presenter:** Formats the data from the Interactor into a presentable format for the SwiftUI Main View. It separates the data formatting from the business logic.
 
-4. **Router:** Handles navigation and routing logic for the ViewController.
+4. **Router:** Handles navigation and routing logic for the scene.
 
 ### SwiftUI
 
 SwiftUI Views are designed using SwiftUI's declarative syntax, which allows us to define the user interface and its behavior in a straightforward and efficient manner. SwiftUI views can be used within the ViewController, providing a seamless integration between UIKit and SwiftUI.
 
-
-
 ## Integration
+Here's how we can seamlessly incorporate SwiftUI into the Clean Swift (VIP) architecture UIKit based:
 
-To integrate SwiftUI with Clean Swift (VIP), we follow these steps:
+1. Begin by setting up a standard VIP scene structure.
 
-1. Define the SwiftUI view in the `View` folder, adhering to the Clean Swift approach for SwiftUI views.
+2. Craft the central UI component as a SwiftUI View and append "MainView" to its name.
 
-2. Create a `SwiftUIViewController` in the `ViewController` folder. This view controller will host the SwiftUI view.
+3. Establish a `SceneViewModel` that conforms to the `ObservableObject` protocol.
 
-3. Implement the `SwiftUIViewController` using a SwiftUI view.
+4. Develop the scene's view controller to host the `SceneViewModel` and present the `SceneMainView`.
 
-4. Inside the Interactor, provide the data required by the SwiftUI view and pass it to the Presenter.
+5. Utilize the `SceneViewModel` as the authoritative source of UI data, facilitating data binding with the `SceneMainView`.
 
-5. The Presenter will take care of formatting the data and provide it to the `SwiftUIViewController`.
+6. When a scenario arises where the view controller needs to listen to the event in the `SceneMainView` – such as interactions like button taps – declare a delegate mechanism for the communication.
 
-6. Finally, in the `SwiftUIViewController`, use the data provided by the Presenter to populate the SwiftUI view.
+## Project Data Model
+### HealthRecord
+| Field        | Type     |
+|--------------|----------|
+| value        | Double   |
+| type         | String   |
+| createdDate  | Date     |
+| id           | UUID     |
 
 ## Contributing
 
