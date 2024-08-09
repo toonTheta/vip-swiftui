@@ -13,11 +13,10 @@
 import UIKit
 import SwiftUI
 
-protocol HealthDetailDisplayLogic: AnyObject {
-    func displayDetail(viewModel: HealthDetail.FetchDetail.ViewModel)
+protocol HealthDetailDisplayActionLogic: AnyObject {
 }
 
-final class HealthDetailViewController: BaseUIViewController, HealthDetailDisplayLogic {
+final class HealthDetailViewController: BaseUIViewController, HealthDetailDisplayActionLogic {
     var interactor: HealthDetailBusinessLogic?
     var router: (HealthDetailRoutingLogic & HealthDetailDataPassing)?
     
@@ -47,14 +46,6 @@ final class HealthDetailViewController: BaseUIViewController, HealthDetailDispla
             )
         )
     }
-    
-    func displayDetail(viewModel: HealthDetail.FetchDetail.ViewModel) {
-        sceneViewModel.unit = viewModel.unit
-        
-        withAnimation {
-            sceneViewModel.state = viewModel.state
-        }
-    }
 }
 
 extension HealthDetailViewController: HealthDetailSceneMainViewDelegate {
@@ -68,7 +59,8 @@ private extension HealthDetailViewController {
         let viewController = self
         
         let presenter = HealthDetailPresenter(
-            viewController: viewController
+            viewController: viewController,
+            sceneViewModel: sceneViewModel
         )
         
         let interactor = HealthDetailInteractor(

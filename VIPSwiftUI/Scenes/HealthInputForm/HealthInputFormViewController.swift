@@ -18,12 +18,10 @@ protocol HealthInputFormViewControllerDelegate: AnyObject {
     func didPressDelete(record: HealthRecord)
 }
 
-protocol HealthInputFormDisplayLogic: AnyObject {
-    func displayProceedTextInput(viewModel: HealthInputForm.ProceedTextInput.ViewModel)
-    func displayPreparedData(viewModel: HealthInputForm.PrepareData.ViewModel)
+protocol HealthInputFormDisplayActionLogic: AnyObject {
 }
 
-final class HealthInputFormViewController: BaseUIViewController, HealthInputFormDisplayLogic, HealthInputFormSceneMainViewDelegate {
+final class HealthInputFormViewController: BaseUIViewController, HealthInputFormDisplayActionLogic, HealthInputFormSceneMainViewDelegate {
     var interactor: HealthInputFormBusinessLogic?
     var router: (HealthInputFormRoutingLogic & HealthInputFormDataPassing)?
     
@@ -52,10 +50,6 @@ final class HealthInputFormViewController: BaseUIViewController, HealthInputForm
         ))
         
         interactor?.prepareData(request: .init())
-    }
-    
-    func displayPreparedData(viewModel: HealthInputForm.PrepareData.ViewModel) {
-        sceneViewModel.updatePreparedData(viewModel: viewModel)
     }
     
     func displayProceedTextInput(viewModel: HealthInputForm.ProceedTextInput.ViewModel) {
@@ -108,7 +102,8 @@ private extension HealthInputFormViewController {
         let viewController = self
         
         let presenter = HealthInputFormPresenter(
-            viewController: viewController
+            viewController: viewController, 
+            sceneViewModel: sceneViewModel
         )
         
         let interactor = HealthInputFormInteractor(

@@ -14,12 +14,11 @@ import UIKit
 import SwiftUI
 
 protocol DashboardDisplayLogic: AnyObject {
-    func displayCategory(categoryItems: [CategoryRowViewModel])
     func displayTapCategory(viewModel: Dashboard.TapCategory.ViewModel)
 }
 
 class DashboardViewController: BaseUIViewController, DashboardDisplayLogic {
-    private let viewModel = DashboardSceneViewModel()
+    private let sceneViewModel = DashboardSceneViewModel()
     var interactor: DashboardInteractor!
     var router: DashboardRoutingLogic!
     
@@ -32,13 +31,9 @@ class DashboardViewController: BaseUIViewController, DashboardDisplayLogic {
         loadMainView(
             DashboardSceneMainView(
                 delegate: self,
-                viewModel: viewModel
+                viewModel: sceneViewModel
             )
         )
-    }
-
-    func displayCategory(categoryItems: [CategoryRowViewModel]) {
-        viewModel.categoryItems = categoryItems
     }
     
     func displayTapCategory(viewModel: Dashboard.TapCategory.ViewModel) {
@@ -48,7 +43,7 @@ class DashboardViewController: BaseUIViewController, DashboardDisplayLogic {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        interactor.fetchCateogory(request: .init())
+        interactor.fetchCategory(request: .init())
     }
 }
 
@@ -65,7 +60,8 @@ private extension DashboardViewController {
         let viewController = self
         
         let presenter = DashboardPresenter(
-            viewController: self
+            viewController: self,
+            sceneViewModel: sceneViewModel
         )
         
         let interactor = DashboardInteractor(

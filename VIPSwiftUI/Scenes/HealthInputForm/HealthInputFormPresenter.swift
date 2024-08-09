@@ -16,23 +16,27 @@ protocol HealthInputFormPresentationLogic {
 }
 
 final class HealthInputFormPresenter: HealthInputFormPresentationLogic {
-    weak var viewController: HealthInputFormDisplayLogic?
+    weak var viewController: HealthInputFormDisplayActionLogic?
     var worker: HealthInputFormPresenterWorkerProtocol
+    private var sceneViewModel: HealthInputFormSceneViewModelProtocol
 
-    var controller: HealthInputFormDisplayLogic? {
+    var controller: HealthInputFormDisplayActionLogic? {
         return viewController
     }
 
     init(
-        viewController: HealthInputFormDisplayLogic,
+        viewController: HealthInputFormDisplayActionLogic,
+        sceneViewModel: HealthInputFormSceneViewModelProtocol,
         worker: HealthInputFormPresenterWorkerProtocol = HealthInputFormPresenterWorker()
     ) {
         self.viewController = viewController
+        self.sceneViewModel = sceneViewModel
         self.worker = worker
     }
     
     func presentPreparedData(response: HealthInputForm.PrepareData.Response) {
-        viewController?.displayPreparedData(viewModel: .init(
+        
+        sceneViewModel.updatePreparedData(viewModel: .init(
             dateTitle: "Date",
             timeTitle: "Time",
             unitTitle: worker.mapUnitLabel(recordType: response.recordType),
@@ -44,6 +48,6 @@ final class HealthInputFormPresenter: HealthInputFormPresentationLogic {
     }
     
     func presentProceedTextInput(response: HealthInputForm.ProceedTextInput.Response) {
-        viewController?.displayProceedTextInput(viewModel: .init(submitButtonDisabled: response.submitButtonDisabled))
+        sceneViewModel.updateProceedTextInput(viewModel: .init(submitButtonDisabled: response.submitButtonDisabled))
     }
 }

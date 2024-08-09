@@ -13,7 +13,7 @@
 import Foundation
 
 protocol DashboardBusinessLogic {
-    func fetchCateogory(request: Dashboard.FetchCategory.Request)
+    func fetchCategory(request: Dashboard.FetchCategory.Request)
     func tapCategory(request: Dashboard.TapCategory.Request)
 }
 
@@ -31,7 +31,7 @@ class DashboardInteractor: DashboardBusinessLogic {
         self.healthService = healthService
     }
     
-    func fetchCateogory(request: Dashboard.FetchCategory.Request) {
+    func fetchCategory(request: Dashboard.FetchCategory.Request) {
         let lastRecords: [CategoryResponse] = recordTypes.map { type in
             let result = healthService.fetchLastRecord(of: type)
             switch result {

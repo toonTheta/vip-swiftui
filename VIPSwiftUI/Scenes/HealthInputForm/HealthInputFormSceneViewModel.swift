@@ -7,7 +7,12 @@
 
 import SwiftUI
 
-class HealthInputFormSceneViewModel: ObservableObject {
+protocol HealthInputFormSceneViewModelProtocol {
+    func updatePreparedData(viewModel: HealthInputForm.PrepareData.ViewModel)
+    func updateProceedTextInput(viewModel: HealthInputForm.ProceedTextInput.ViewModel)
+}
+
+class HealthInputFormSceneViewModel: ObservableObject, HealthInputFormSceneViewModelProtocol {
     @Published var dateTitle: String
     @Published var timeTitle: String
     @Published var unitTitle: String
@@ -56,5 +61,9 @@ class HealthInputFormSceneViewModel: ObservableObject {
         self.textInputValue = viewModel.textInputValue
         self.saveButtonDisabled = viewModel.submitButtonDisabled
         self.deleteButtonDisplay = viewModel.deleteButtonDisplay
+    }
+    
+    func updateProceedTextInput(viewModel: HealthInputForm.ProceedTextInput.ViewModel) {
+        saveButtonDisabled = viewModel.submitButtonDisabled
     }
 }

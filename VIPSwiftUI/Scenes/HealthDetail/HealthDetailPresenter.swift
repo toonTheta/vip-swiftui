@@ -15,18 +15,21 @@ protocol HealthDetailPresentationLogic {
 }
 
 final class HealthDetailPresenter: HealthDetailPresentationLogic {
-    weak var viewController: HealthDetailDisplayLogic?
+    weak var viewController: HealthDetailDisplayActionLogic?
+    private var sceneViewModel: HealthDetailSceneViewModelProtocol
     var worker: HealthDetailPresenterWorkerProtocol
 
-    var controller: HealthDetailDisplayLogic? {
+    var controller: HealthDetailDisplayActionLogic? {
         return viewController
     }
 
     init(
-        viewController: HealthDetailDisplayLogic,
+        viewController: HealthDetailDisplayActionLogic,
+        sceneViewModel: HealthDetailSceneViewModel,
         worker: HealthDetailPresenterWorkerProtocol = HealthDetailPresenterWorker()
     ) {
         self.viewController = viewController
+        self.sceneViewModel = sceneViewModel
         self.worker = worker
     }
     
@@ -36,7 +39,7 @@ final class HealthDetailPresenter: HealthDetailPresentationLogic {
             .map { ($0.id!, $0.value, $0.createdDate!, $0.type! )}
             .compactMap(HealthRecordViewModel.init)
         
-        viewController?.displayDetail(
+        sceneViewModel.updateDetail(
             viewModel: .init(
                 unit: worker.getUnit(ofType: response.recordType),
                 state: .init(value: recordViewModel)

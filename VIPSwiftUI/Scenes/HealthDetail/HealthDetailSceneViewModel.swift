@@ -8,7 +8,11 @@
 import Foundation
 import SwiftUI
 
-class HealthDetailSceneViewModel: ObservableObject {
+protocol HealthDetailSceneViewModelProtocol {
+    func updateDetail(viewModel: HealthDetail.FetchDetail.ViewModel)
+}
+
+class HealthDetailSceneViewModel: ObservableObject, HealthDetailSceneViewModelProtocol {
     @Published var state: State
     @Published var unit: String
     
@@ -45,6 +49,14 @@ class HealthDetailSceneViewModel: ObservableObject {
             case let .showRecords(model):
                 showRecords(model)
             }
+        }
+    }
+    
+    func updateDetail(viewModel: HealthDetail.FetchDetail.ViewModel) {
+        unit = viewModel.unit
+        
+        withAnimation { [weak self] in
+            self?.state = viewModel.state
         }
     }
 }

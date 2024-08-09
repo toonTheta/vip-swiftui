@@ -7,7 +7,11 @@
 
 import Foundation
 
-class DashboardSceneViewModel: ObservableObject {
+protocol DashboardSceneViewModelProtocol {
+    func updateCategory(categoryItems: [CategoryRowViewModel])
+}
+
+class DashboardSceneViewModel: ObservableObject, DashboardSceneViewModelProtocol {
     @Published var categoryItems: [CategoryRowViewModel]
     
     init() {
@@ -15,6 +19,10 @@ class DashboardSceneViewModel: ObservableObject {
     }
     
     init(categoryItems: [CategoryRowViewModel]) {
+        self.categoryItems = categoryItems
+    }
+    
+    func updateCategory(categoryItems: [CategoryRowViewModel]) {
         self.categoryItems = categoryItems
     }
 }

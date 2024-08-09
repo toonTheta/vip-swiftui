@@ -19,19 +19,22 @@ protocol DashboardPresentationLogic {
 
 class DashboardPresenter: DashboardPresentationLogic {
     
-    weak var viewController: DashboardDisplayLogic?
+    private weak var viewController: DashboardDisplayLogic?
+    private var sceneViewModel: DashboardSceneViewModelProtocol
     var worker: CounterPresenterWorkerProtocol
 
     init(
         viewController: DashboardViewController,
+        sceneViewModel: DashboardSceneViewModelProtocol,
         worker: CounterPresenterWorkerProtocol = DashboardPresenterWorker()
     ) {
         self.viewController = viewController
+        self.sceneViewModel = sceneViewModel
         self.worker = worker
     }
 
     func presentCategory(response: Dashboard.FetchCategory.Response) {
-        viewController?.displayCategory(
+        sceneViewModel.updateCategory(
             categoryItems: worker.mapCategoryRow(from: response.recentCategoryResponse)
         )
     }
